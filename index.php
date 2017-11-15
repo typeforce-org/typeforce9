@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <title>Start Here.</title>
+    <title>Typeforce 9</title>
     <link rel="canonical" href="">
     <meta name="description" content="">
     <meta property="og:title" content="" />
@@ -28,23 +28,23 @@
   <body>
     <!-- include svg-defs with whatever (php,ruby,etc.), ex: <?php include_once("assets/svgs/build/svgs-defs.svg"); ?> -->
     <header class="site-header" role="banner">
-      <div class="wrap">
+<!--       <div class="wrap">
         <h1>Start Here.</h1>
         <nav class="site-nav" role="navigation"> 
    
         </nav>
-      </div>
+      </div> -->
     </header>
     <main class="site-main" role="main">
-      <div class="wrap">
+<!--       <div class="wrap">
         <p>A front-end template used on projects by <a href="https://github.com/poopsplat">@poopsplat</a>.</p>
         <p>Start here, and carry on.</p>
-      </div>
+      </div> -->
     </main>
     <footer class="site-footer" role="contentinfo">
-      <div class="wrap">
+<!--       <div class="wrap">
         
-      </div>
+      </div> -->
     </footer>
     <script src="assets/js/build/site.min.js"></script>
     <script type="text/javascript">// Google Analytics
