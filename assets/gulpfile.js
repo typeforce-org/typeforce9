@@ -13,8 +13,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     browserSync = require('browser-sync').create(),
     svgstore = require('gulp-svgstore'),
-    svgmin = require('gulp-svgmin'),
-    svg2png = require('gulp-svg2png')
+    svgmin = require('gulp-svgmin')
 
 // File path vars
 var paths = {
@@ -79,12 +78,6 @@ gulp.task('svgs', function() {
     .pipe(rename({suffix: '-defs'}))
     .pipe(gulp.dest('svgs/build'))
     .pipe(browserSync.stream());
-});
-// convert to png for fallback
-gulp.task('svgfallback', function() {
-  return gulp.src(paths.svgSrc)
-    .pipe(svg2png())
-    .pipe(gulp.dest('../'));
 });
 
 // Do the build
