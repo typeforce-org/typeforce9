@@ -9,12 +9,13 @@ var Main = (function($) {
       loadingTimer;
 
   // 3D Global variables
-  var camera, scene, renderer;
-  var nines;
+  var camera, controls, scene, renderer;
+  var nines, skybox, reflectiveMaterial, axisHelper, boxes;
+  var rotation = 0;
 
   function _init() {
     // touch-friendly fast clicks
-    FastClick.attach(document.body);
+    // FastClick.attach(document.body);
 
     // Cache some common DOM queries
     $document = $(document);
@@ -89,52 +90,34 @@ var Main = (function($) {
 
     // Configure the camera
     camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 100 );
-    camera.position.set (0, 14 , 0);
+    controls = new THREE.OrbitControls( camera );
+
+    camera.position.set (0, 0 , 14);
     camera.lookAt(new THREE.Vector3( 0, 0 , 0));
+    controls.update();
+
 
     // Create a scene
     scene = new THREE.Scene();
 
     // Make Reflective Material
-    var skybox = new THREE.CubeTextureLoader()
+    skybox = new THREE.CubeTextureLoader()
       .setPath('assets/skybox/')
       .load( [ 'x-pos.png','x-neg.png','y-pos.png','y-neg.png','z-pos.png','z-neg.png' ]);
-    var reflectiveMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff, envMap: skybox } );
+    reflectiveMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff, envMap: skybox } );
        
     // Load Nines
     nines = [];
+    boxes = [];
     loadNine(0);
     loadNine(1);
     loadNine(2);
     loadNine(3);
     loadNine(4);
 
-
-    function loadNine(thisNine) {
-      daeLocation = 'assets/models/nine-'+(thisNine+1)+'.dae';
-
-      var manager = new THREE.LoadingManager();
-      // manager.onProgress = function(item, loaded, total) {
-      //   console.log(item,loaded,total);
-      // };
-
-      var loader = new THREE.ColladaLoader(manager);
-      loader.load(daeLocation, function(collada) {
-        nines[thisNine] = collada.scene;
-
-        nines[thisNine].position.set(-10+5*thisNine,0,0);
-
-        var nChildren = nines[thisNine].children.length;
-        for (i = 0; i<nChildren; i++) {
-          nines[thisNine].children[i].material = reflectiveMaterial;
-        }
-
-        scene.add(nines[thisNine]);
-
-        console.log(thisNine);
-        console.log(nines);
-      });
-    }
+    // Add axis helper
+    axisHelper = new THREE.AxisHelper( 1.25 );
+    scene.add( axisHelper );
 
     // Create renderer obj and append to body
     renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -146,6 +129,31 @@ var Main = (function($) {
     animate3D();
   }
 
+
+  function loadNine(whichNine) {
+    daeLocation = 'assets/models/nine-'+(whichNine+1)+'.dae';
+
+    var manager = new THREE.LoadingManager();
+
+    var loader = new THREE.ColladaLoader(manager);
+    loader.options.convertUpAxis = true;
+    loader.load(daeLocation, function(collada) {
+      nines[whichNine] = collada.scene;
+
+      nines[whichNine].position.set(-10+5*whichNine,0,0);
+
+      var nChildren = nines[whichNine].children.length;
+      for (i = 0; i<nChildren; i++) {
+        nines[whichNine].children[i].material = reflectiveMaterial;
+      }
+
+      boxes[whichNine] = new THREE.BoxHelper( nines[whichNine], 0xffff00 );
+      scene.add( boxes[whichNine] );
+
+      scene.add(nines[whichNine]);
+    });
+  }
+
   function resize3D() {
 
     // If renderer has been set up...
@@ -154,6 +162,8 @@ var Main = (function($) {
       // Update the camera to reflect new window size
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
+
+      controls.handleResize();
 
       // Update size of renderer element
       renderer.setSize( window.innerWidth, window.innerHeight);
@@ -165,10 +175,14 @@ var Main = (function($) {
     // Do this every time the system is ready to animate
     requestAnimationFrame( animate3D );
 
+    controls.update();
+
+    rotation += 0.01;
+
     // Rotate the mesh
     for(i=0;i<5;i++) {
        if ( nines[i] !== undefined ) {
-        nines[i].rotation.y += 0.01;
+        nines[i].rotation.y = rotation;
       } 
     }
 

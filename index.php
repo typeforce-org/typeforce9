@@ -27,25 +27,32 @@
   </head>
   <body>
     <!-- include svg-defs with whatever (php,ruby,etc.), ex: <?php include_once("assets/svgs/build/svgs-defs.svg"); ?> -->
-<!--     <header class="site-header" role="banner">
-      <div class="wrap">
-        <h1>Start Here.</h1>
-        <nav class="site-nav" role="navigation"> 
-   
-        </nav>
-      </div>
-    </header>
-    <main class="site-main" role="main">
-      <div class="wrap">
-        <p>A front-end template used on projects by <a href="https://github.com/poopsplat">@poopsplat</a>.</p>
-        <p>Start here, and carry on.</p>
-      </div>
-    </main>
-    <footer class="site-footer" role="contentinfo">
-      <div class="wrap">
-        
-      </div>
-    </footer> -->
+    <div class="site-content">
+<!--       <header class="site-header" role="banner">
+        <div class="wrap">
+          <h1>Typeforce 9 3D Test</h1>
+          <nav class="site-nav" role="navigation"> 
+     
+          </nav>
+        </div>
+      </header> -->
+      <main class="site-main" role="main">
+        <div class="wrap">
+          <p>Click to drag. Scroll to zoom.</p>
+          <p>Axis helper is placed at origin with each line length 1.</p>
+          <ul>
+            <li>X axis is red.</li>
+            <li>Y axis is green.</li>
+            <li>Z axis is blue.</li>
+          </ul>
+        </div>
+      </main>
+<!--       <footer class="site-footer" role="contentinfo">
+        <div class="wrap">
+          
+        </div>
+      </footer> -->
+    </div>
     <script src="assets/js/build/site.js#<?= time(); ?>"></script>
     <script type="text/javascript">// Google Analytics
       var _gaq = _gaq || [];

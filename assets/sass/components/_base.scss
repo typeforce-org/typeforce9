@@ -10,6 +10,7 @@ html {
 body {
 	font-size: 16px; //Em base unit
 	font-size: 100%;
+  color: white;
 }
 
 p {
@@ -36,4 +37,14 @@ img {
   @include min-screen($bpMd) {
     // set breakpoints on a per-module basis when possible
   }
+}
+
+.site-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  // width: 100vw;
+  // height: 100vh;
+  background: rgba(white,0.1);
+  overflow-y: scroll;
 }
