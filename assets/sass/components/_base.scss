@@ -10,7 +10,7 @@ html {
 body {
 	font-size: 16px; //Em base unit
 	font-size: 100%;
-  color: white;
+  color: $white;
 }
 
 p {
@@ -40,11 +40,36 @@ img {
 }
 
 .site-content {
-  position: fixed;
   top: 0;
   left: 0;
+  position: fixed;
   // width: 100vw;
   // height: 100vh;
-  background: rgba(white,0.1);
   overflow-y: scroll;
+  background: rgba($black,0.5);
+}
+
+.load-mask {
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;  
+  background: $black;
+  transition: opacity 0.3s;
+
+  .loading-text {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+  }
+}
+
+body.loaded {
+  .load-mask {
+    opacity: 0;
+    pointer-events: none;
+  }
 }

@@ -10,16 +10,17 @@ var Main = (function($) {
 
   // 3D Global variables
   var camera, controls, scene, renderer;
-  var nines, skybox, reflectiveMaterial, axisHelper, boxes;
-  var rotation = 0;
+  var nines=[], icosphere, skybox, skyboxReversed, nineMaterial, icosphereMaterial, axesHelper, boxes=[];
+  var nineRotation = 0;
+  var animationStarted = false;
+  var currentNine = 0;
 
   function _init() {
     // touch-friendly fast clicks
-    // FastClick.attach(document.body);
+    FastClick.attach(document.body);
 
     // Cache some common DOM queries
     $document = $(document);
-    $('body').addClass('loaded');
 
     // Set screen size vars
     _resize();
@@ -92,103 +93,204 @@ var Main = (function($) {
     camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 100 );
     controls = new THREE.OrbitControls( camera );
 
-    camera.position.set (0, 0 , 14);
+    camera.position.set (0, 0 , 7);
     camera.lookAt(new THREE.Vector3( 0, 0 , 0));
     controls.update();
 
-
     // Create a scene
     scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2( 0xFFFFFF, 0.04 );
 
-    // Make Reflective Material
+    // Make Skyboxes for Reflective Materials
     skybox = new THREE.CubeTextureLoader()
       .setPath('assets/skybox/')
       .load( [ 'x-pos.png','x-neg.png','y-pos.png','y-neg.png','z-pos.png','z-neg.png' ]);
-    reflectiveMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff, envMap: skybox } );
-       
-    // Load Nines
-    nines = [];
-    boxes = [];
-    loadNine(0);
-    loadNine(1);
-    loadNine(2);
-    loadNine(3);
-    loadNine(4);
+
+    skyboxReversed = new THREE.CubeTextureLoader()
+      .setPath('assets/skybox/')
+      .load( [ 'x-pos.png','x-neg.png','y-neg.png','y-pos.png','z-pos.png','z-neg.png' ]);
+ 
+    // Make materials
+    nineMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff, envMap: skybox } );
+    icosphereMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff, envMap: skyboxReversed, side: THREE.BackSide } );
+
 
     // Add axis helper
-    axisHelper = new THREE.AxisHelper( 1.25 );
-    scene.add( axisHelper );
+    axesHelper = new THREE.AxesHelper( 1.25 );
+    scene.add( axesHelper );
 
     // Create renderer obj and append to body
     renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize( window.innerWidth, window.innerHeight );
-    document.body.appendChild( renderer.domElement );
 
-    // Begin animation/rendering
-    animate3D();
+    // Load All Nine Models
+    loadNine(0);
+    loadNine(1);
+    loadNine(2);
+    loadNine(3);
+    loadNine(4);
+    loadIcosphere();
   }
 
 
   function loadNine(whichNine) {
-    daeLocation = 'assets/models/nine-'+(whichNine+1)+'.dae';
+    // Path of collada (dae) model file
+    daeLocation = 'assets/models/nine-'+whichNine+'.dae';
 
+    // Load Collada
     var manager = new THREE.LoadingManager();
-
     var loader = new THREE.ColladaLoader(manager);
-    loader.options.convertUpAxis = true;
     loader.load(daeLocation, function(collada) {
+      // Once that model is loaded...
+
+      // Grab the scene in the collada file
       nines[whichNine] = collada.scene;
 
-      nines[whichNine].position.set(-10+5*whichNine,0,0);
+      // Traverse each child of scene
+      nines[whichNine].traverse ( function (child) {
 
-      var nChildren = nines[whichNine].children.length;
-      for (i = 0; i<nChildren; i++) {
-        nines[whichNine].children[i].material = reflectiveMaterial;
-      }
+        // Set every child mesh to have reflective material
+        if (child instanceof THREE.Mesh) {
+          child.material = nineMaterial;
+        }
 
-      boxes[whichNine] = new THREE.BoxHelper( nines[whichNine], 0xffff00 );
-      scene.add( boxes[whichNine] );
+        // Remove light souce in collada scene
+        if (child instanceof THREE.PointLight) {
+          child.remove();
+        }
+      });
 
+      // Add to scene
       scene.add(nines[whichNine]);
+
+      // Make invisible
+      objVisible(nines[whichNine],false);
+
+      // Check if all the models have loaded
+      checkIfModelsLoaded();
     });
   }
 
+  function loadIcosphere() {
+    // Path of collada (dae) model file
+    daeLocation = 'assets/models/icosphere.dae';
+
+    // Load Collada
+    var manager = new THREE.LoadingManager();
+    var loader = new THREE.ColladaLoader(manager);
+    loader.load(daeLocation, function(collada) {
+      // Once that model is loaded...
+
+      // Grab the scene in the collada file
+      icosphere = collada.scene;
+
+      // Traverse each child of scene
+      icosphere.traverse ( function (child) {
+
+        // Set every child mesh to have reflective material
+        if (child instanceof THREE.Mesh) {
+          child.material = icosphereMaterial;
+        }
+
+        // Remove light souce in collada scene
+        if (child instanceof THREE.PointLight) {
+          child.remove();
+        }
+      });
+
+      // Add to scene
+      scene.add(icosphere);
+
+      // Check if all the models have loaded
+      checkIfModelsLoaded();
+    });
+  }
+
+  function checkIfModelsLoaded() {
+    // Check to see if each model is loaded
+    if (
+      nines[0] &&
+      nines[1] &&
+      nines[2] &&
+      nines[3] &&
+      nines[4] &&
+      icosphere
+    ) {
+      modelsLoaded();
+    }
+  }
+
+  function modelsLoaded() {
+    // Add the renderer to the DOM
+    document.body.appendChild( renderer.domElement );
+
+    objVisible(nines[0],true);
+
+    // Begin animation/rendering
+    animate3D();
+
+    // Animation Started
+    $('body').addClass('loaded');
+  }
+
+
+  function animate3D() {
+    animationStarted = true;
+
+    // Do this every time the system is ready to animate
+    requestAnimationFrame( animate3D );
+
+    // Update the controls
+    controls.update();
+
+    // Rotate icosphere
+    icosphere.rotation.z -= 0.0001
+
+    // Progress global nineRotation for use in nines
+    nineRotation += 0.005
+
+    // Rotate the mesh
+    for(i=0;i<5;i++) {
+       if ( nines[i] !== undefined ) {
+        nines[i].rotation.z = nineRotation;
+      } 
+    }
+
+    // Determine which nine to display based on which 5th of nineRotation
+    var previousNine = currentNine;
+    currentNine = Math.floor((( nineRotation / (2*Math.PI) ) % 1)*5);
+    if(currentNine !== previousNine) {
+      objVisible(nines[previousNine],false);
+      objVisible(nines[currentNine],true);
+    }
+
+    // Render
+    renderer.render( scene, camera );
+  }
+
+  // Turne a Three.js scene object visible or invisible
+  function objVisible(object,visibleOrHidden) {
+    object.traverse ( function (child) {
+      if (child instanceof THREE.Mesh) {
+        child.visible = visibleOrHidden;
+      }
+    });
+  }
+
+  // Handle resizing 
   function resize3D() {
 
     // If renderer has been set up...
-    if(typeof renderer !== 'undefined') {
+    if(animationStarted) {
 
       // Update the camera to reflect new window size
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
 
-      controls.handleResize();
-
       // Update size of renderer element
       renderer.setSize( window.innerWidth, window.innerHeight);
     }
-  }
-
-  function animate3D() {
-
-    // Do this every time the system is ready to animate
-    requestAnimationFrame( animate3D );
-
-    controls.update();
-
-    rotation += 0.01;
-
-    // Rotate the mesh
-    for(i=0;i<5;i++) {
-       if ( nines[i] !== undefined ) {
-        nines[i].rotation.y = rotation;
-      } 
-    }
-
-
-    // Render
-    renderer.render( scene, camera );
   }
 
 

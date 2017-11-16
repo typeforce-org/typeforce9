@@ -432,7 +432,7 @@ html {
 body {
   font-size: 16px;
   font-size: 100%;
-  color: white;
+  color: #fff;
 }
 
 p {
@@ -468,9 +468,32 @@ img {
 }
 
 .site-content {
-  position: fixed;
   top: 0;
   left: 0;
-  background: rgba(255, 255, 255, 0.1);
+  position: fixed;
   overflow-y: scroll;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.load-mask {
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background: #000;
+  transition: opacity 0.3s;
+}
+.load-mask .loading-text {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+body.loaded .load-mask {
+  opacity: 0;
+  pointer-events: none;
 }
