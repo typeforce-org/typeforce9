@@ -10,7 +10,7 @@ var Main = (function($) {
 
   // 3D Global variables
   var camera, scene, renderer;
-  var geometry, material, mesh;
+  var nines;
 
   function _init() {
     // touch-friendly fast clicks
@@ -83,21 +83,62 @@ var Main = (function($) {
   }
 
   function init3D() {
+
+    // Check for webGL
+    if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
     // Configure the camera
-    camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
-    camera.position.z = 1;
+    camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 100 );
+    camera.position.set (0, 14 , 0);
+    camera.lookAt(new THREE.Vector3( 0, 0 , 0));
 
     // Create a scene
     scene = new THREE.Scene();
 
-    // Build a 3d box mesh out of [geometry, material] as example
-    geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
-    material = new THREE.MeshNormalMaterial();
-    mesh = new THREE.Mesh( geometry, material );
-    scene.add( mesh );
+    // Make Reflective Material
+    var skybox = new THREE.CubeTextureLoader()
+      .setPath('assets/skybox/')
+      .load( [ 'x-pos.png','x-neg.png','y-pos.png','y-neg.png','z-pos.png','z-neg.png' ]);
+    var reflectiveMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff, envMap: skybox } );
+       
+    // Load Nines
+    nines = [];
+    loadNine(0);
+    loadNine(1);
+    loadNine(2);
+    loadNine(3);
+    loadNine(4);
 
-    // Create renderer and append to body
+
+    function loadNine(thisNine) {
+      daeLocation = 'assets/models/nine-'+(thisNine+1)+'.dae';
+
+      var manager = new THREE.LoadingManager();
+      // manager.onProgress = function(item, loaded, total) {
+      //   console.log(item,loaded,total);
+      // };
+
+      var loader = new THREE.ColladaLoader(manager);
+      loader.load(daeLocation, function(collada) {
+        nines[thisNine] = collada.scene;
+
+        nines[thisNine].position.set(-10+5*thisNine,0,0);
+
+        var nChildren = nines[thisNine].children.length;
+        for (i = 0; i<nChildren; i++) {
+          nines[thisNine].children[i].material = reflectiveMaterial;
+        }
+
+        scene.add(nines[thisNine]);
+
+        console.log(thisNine);
+        console.log(nines);
+      });
+    }
+
+    // Create renderer obj and append to body
     renderer = new THREE.WebGLRenderer( { antialias: true } );
+    renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize( window.innerWidth, window.innerHeight );
     document.body.appendChild( renderer.domElement );
 
@@ -106,8 +147,16 @@ var Main = (function($) {
   }
 
   function resize3D() {
+
+    // If renderer has been set up...
     if(typeof renderer !== 'undefined') {
-      // renderer.setSize( window.innerWidth, window.innerHeight ); // This doesn't maintain aspect ratio of 3d content...
+
+      // Update the camera to reflect new window size
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+
+      // Update size of renderer element
+      renderer.setSize( window.innerWidth, window.innerHeight);
     }
   }
 
@@ -116,9 +165,13 @@ var Main = (function($) {
     // Do this every time the system is ready to animate
     requestAnimationFrame( animate3D );
 
-    // Rotate the cube
-    mesh.rotation.x += 0.01;
-    mesh.rotation.y += 0.02;
+    // Rotate the mesh
+    for(i=0;i<5;i++) {
+       if ( nines[i] !== undefined ) {
+        nines[i].rotation.y += 0.01;
+      } 
+    }
+
 
     // Render
     renderer.render( scene, camera );

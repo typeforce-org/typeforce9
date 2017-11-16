@@ -46,7 +46,7 @@
         
       </div>
     </footer> -->
-    <script src="assets/js/build/site.min.js#<?= time(); ?>"></script>
+    <script src="assets/js/build/site.js#<?= time(); ?>"></script>
     <script type="text/javascript">// Google Analytics
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-XXXXX-X']); // Replace "XXXXX-X" with your account code
