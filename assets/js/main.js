@@ -90,38 +90,37 @@ var Main = (function($) {
     if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
     // Configure the camera
-    camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 100 );
+    camera = new THREE.PerspectiveCamera( 65, window.innerWidth / window.innerHeight, 0.01, 100 );
     controls = new THREE.OrbitControls( camera );
 
-    camera.position.set (0, 0 , 7);
+    camera.position.set (0, -2 , 7);
     camera.lookAt(new THREE.Vector3( 0, 0 , 0));
     controls.update();
 
     // Create a scene
     scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2( 0xFFFFFF, 0.04 );
+    // scene.fog = new THREE.FogExp2( 0xFFFFFF, 0.04 );
+    scene.background = new THREE.Color( 0x090114 );
 
     // Make Skyboxes for Reflective Materials
     skybox = new THREE.CubeTextureLoader()
       .setPath('assets/skybox/')
       .load( [ 'x-pos.png','x-neg.png','y-pos.png','y-neg.png','z-pos.png','z-neg.png' ]);
-
-    skyboxReversed = new THREE.CubeTextureLoader()
-      .setPath('assets/skybox/')
-      .load( [ 'x-pos.png','x-neg.png','y-neg.png','y-pos.png','z-pos.png','z-neg.png' ]);
  
     // Make materials
     nineMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff, envMap: skybox } );
-    icosphereMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff, envMap: skyboxReversed, side: THREE.BackSide } );
-
+    icosphereMaterial = new THREE.MeshBasicMaterial({
+        color: 0x0c0061,
+        wireframe: true
+    });
 
     // Add axis helper
-    axesHelper = new THREE.AxesHelper( 1.25 );
-    scene.add( axesHelper );
+    // axesHelper = new THREE.AxesHelper( 1 );
+    // scene.add( axesHelper );
 
     // Create renderer obj and append to body
     renderer = new THREE.WebGLRenderer( { antialias: true } );
-    renderer.setPixelRatio( window.devicePixelRatio );
+    // renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize( window.innerWidth, window.innerHeight );
 
     // Load All Nine Models
@@ -250,20 +249,20 @@ var Main = (function($) {
     // Progress global nineRotation for use in nines
     nineRotation += 0.005
 
-    // Rotate the mesh
-    for(i=0;i<5;i++) {
-       if ( nines[i] !== undefined ) {
-        nines[i].rotation.z = nineRotation;
-      } 
-    }
+    // // Rotate the mesh
+    // for(i=0;i<5;i++) {
+    //    if ( nines[i] !== undefined ) {
+    //     nines[i].rotation.z = nineRotation;
+    //   } 
+    // }
 
-    // Determine which nine to display based on which 5th of nineRotation
-    var previousNine = currentNine;
-    currentNine = Math.floor((( nineRotation / (2*Math.PI) ) % 1)*5);
-    if(currentNine !== previousNine) {
-      objVisible(nines[previousNine],false);
-      objVisible(nines[currentNine],true);
-    }
+    // // Determine which nine to display based on which 5th of nineRotation
+    // var previousNine = currentNine;
+    // currentNine = Math.floor((( nineRotation / (2*Math.PI) ) % 1)*5);
+    // if(currentNine !== previousNine) {
+    //   objVisible(nines[previousNine],false);
+    //   objVisible(nines[currentNine],true);
+    // }
 
     // Render
     renderer.render( scene, camera );

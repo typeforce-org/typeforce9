@@ -36,7 +36,7 @@
           </nav>
         </div>
       </header> -->
-      <main class="site-main" role="main">
+<!--       <main class="site-main" role="main">
         <div class="wrap">
           <p>Click to drag. Scroll to zoom.</p>
           <p>Axis helper is placed at origin with each line length 1.</p>
@@ -46,7 +46,7 @@
             <li>Z axis is blue.</li>
           </ul>
         </div>
-      </main>
+      </main> -->
 <!--       <footer class="site-footer" role="contentinfo">
         <div class="wrap">
           
