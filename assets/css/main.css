@@ -467,13 +467,6 @@ img {
   clear: both;
 }
 
-.site-content {
-  top: 0;
-  left: 0;
-  position: fixed;
-  overflow-y: scroll;
-}
-
 .load-mask {
   top: 0;
   left: 0;
@@ -481,12 +474,15 @@ img {
   width: 100vw;
   height: 100vh;
   position: fixed;
-  background: #000;
+  background: #090114;
   transition: opacity 0.3s;
 }
-.load-mask .loading-text {
+.load-mask img {
   top: 50%;
   left: 50%;
+  content: '';
+  width: 300px;
+  height: 300px;
   position: absolute;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);

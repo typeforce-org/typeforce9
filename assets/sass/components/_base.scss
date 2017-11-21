@@ -39,16 +39,6 @@ img {
   }
 }
 
-.site-content {
-  top: 0;
-  left: 0;
-  position: fixed;
-  // width: 100vw;
-  // height: 100vh;
-  overflow-y: scroll;
-  // background: rgba($black,0.5);
-}
-
 .load-mask {
   top: 0;
   left: 0;
@@ -58,10 +48,12 @@ img {
   position: fixed;  
   background: $black;
   transition: opacity 0.3s;
-
-  .loading-text {
+  img {
     top: 50%;
     left: 50%;
+    content: '';
+    width: 300px;
+    height: 300px;
     position: absolute;
     transform: translate(-50%,-50%);
   }

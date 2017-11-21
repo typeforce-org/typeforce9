@@ -13,7 +13,7 @@ var Main = (function($) {
   var camera, scene, renderer;
   var nines=[], icosphere, skybox, sykboxLoaded = false;
   var animationStarted = false;
-  var currentNine = 0;
+  var currentNine = 4;
   var noralizedPosition=0;
 
   function _init() {
@@ -253,8 +253,8 @@ var Main = (function($) {
         var mouseX = e.pageX;
         var windowWidth = window.innerWidth;
 
-        // Map mouse x position to continuum [0,1]
-        noralizedPosition = (mouseX/windowWidth);
+        // Map mouse x position to continuum [-1,1]
+        noralizedPosition = (mouseX/windowWidth)*2-1;
       }
     });
   }
@@ -269,7 +269,7 @@ var Main = (function($) {
 
     // Determine which nine to display based on which 10th of normalized
     var previousNine = currentNine;
-    currentNine = Math.floor(noralizedPosition*9);
+    currentNine = Math.floor((noralizedPosition+1)/2*9);
 
     // If we've changed nines, make it so
     if(currentNine !== previousNine) {
@@ -279,7 +279,17 @@ var Main = (function($) {
     }
 
     // Move the camera to the right place
-    camera.position.set ((noralizedPosition*2-1)*6, -2 , 7);
+    camera.position.set (noralizedPosition^2*6.33+.64, -1.5 , 8);
+
+    // x,y,z,fov
+    // 0,       -8,     -1.5      72.2
+    // 1.25,    -8,     -1.5      72.2
+    // 2.5,     -8,     -1.5      82.4
+    // 4,       -8,     -1.5      82.4
+    // 7,       -8,     -1.5      88.4
+
+
+    // y = 6.329004329 x2 + 0 x + 6.406926407·10-1
 
     // Repoint the camera
     camera.lookAt(new THREE.Vector3( 0, 0 , 0));

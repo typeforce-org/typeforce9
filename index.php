@@ -26,33 +26,7 @@
     <script src="assets/js/no-build/modernizr.custom.js"></script>
   </head>
   <body>
-    <!-- include svg-defs with whatever (php,ruby,etc.), ex: <?php include_once("assets/svgs/build/svgs-defs.svg"); ?> -->
-    <div class="site-content">
-<!--       <header class="site-header" role="banner">
-        <div class="wrap">
-          <h1>Typeforce 9 3D Test</h1>
-          <nav class="site-nav" role="navigation"> 
-     
-          </nav>
-        </div>
-      </header> -->
-<!--       <main class="site-main" role="main">
-        <div class="wrap">
-          <p>Click to drag. Scroll to zoom.</p>
-          <p>Axis helper is placed at origin with each line length 1.</p>
-          <ul>
-            <li>X axis is red.</li>
-            <li>Y axis is green.</li>
-            <li>Z axis is blue.</li>
-          </ul>
-        </div>
-      </main> -->
-<!--       <footer class="site-footer" role="contentinfo">
-        <div class="wrap">
-          
-        </div>
-      </footer> -->
-    </div>
+    <div class="load-mask"><img src="/assets/images/preloader.gif" /></div>
     <script src="assets/js/build/site.js#<?= time(); ?>"></script>
     <script type="text/javascript">// Google Analytics
       var _gaq = _gaq || [];
@@ -64,6 +38,5 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
-    <div class="load-mask"><p class="loading-text">Loading</p></div>
   </body>
 </html>
