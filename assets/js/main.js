@@ -225,10 +225,11 @@ var Main = (function($) {
     // Add the renderer to the DOM
     document.body.appendChild( renderer.domElement );
 
-    objVisible(nines[0],true);
-
     // Throttled mousewatching (and will be accelerometer tracking)
     watchPosition();
+
+    // Make first nine visible
+    objVisible(nines[currentNine],true);
 
     // Begin animation/rendering
     animate3D();
@@ -241,7 +242,7 @@ var Main = (function($) {
 
     var lastMove = 0;
     var eventThrottle = 10;
-    $(window).on('mousemove', function(e) {
+    $(document).on('mousemove', function(e) {
       e.preventDefault();
 
       // Throttle (thanks Matt!)
@@ -256,7 +257,7 @@ var Main = (function($) {
         // Map mouse x position to continuum [-1,1]
         noralizedPosition = (mouseX/windowWidth)*2-1;
       }
-    });
+    })
   }
 
   function animate3D() {
@@ -269,18 +270,16 @@ var Main = (function($) {
 
     // Determine which nine to display based on which 10th of normalized
     var previousNine = currentNine;
-    currentNine = Math.floor((noralizedPosition+1)/2*9);
+    currentNine = Math.floor(((noralizedPosition+1)/2)*9);
 
     // If we've changed nines, make it so
     if(currentNine !== previousNine) {
       objVisible(nines[previousNine],false);
       objVisible(nines[currentNine],true);
-      console.log(currentNine);
     }
 
     // Move the camera to the right place
-    camera.position.set (noralizedPosition^2*6.33+.64, -1.5 , 8);
-
+    camera.position.set (Math.pow(noralizedPosition,3)*2.83+noralizedPosition*4.08, -1.5 , 8); 
     // x,y,z,fov
     // 0,       -8,     -1.5      72.2
     // 1.25,    -8,     -1.5      72.2
@@ -289,7 +288,7 @@ var Main = (function($) {
     // 7,       -8,     -1.5      88.4
 
 
-    // y = 6.329004329 x2 + 0 x + 6.406926407·10-1
+    // 2.828282828 x3 + 0 x2 + 4.080808081 x + 0
 
     // Repoint the camera
     camera.lookAt(new THREE.Vector3( 0, 0 , 0));
