@@ -14,7 +14,7 @@ var Main = (function($) {
   var nines=[], icosphere, skybox, sykboxLoaded = false;
   var animationStarted = false;
   var currentNine = 4;
-  var noralizedPosition=0;
+  var positionNormalized=0;
 
   function _init() {
     // touch-friendly fast clicks
@@ -255,9 +255,16 @@ var Main = (function($) {
         var windowWidth = window.innerWidth;
 
         // Map mouse x position to continuum [-1,1]
-        noralizedPosition = (mouseX/windowWidth)*2-1;
+        positionNormalized = (mouseX/windowWidth)*2-1;
       }
+
+      animateLetters();
     })
+  }
+
+  function animateLetters() {
+    $('.site-header .t').css({'transform':'translateX('+(-positionNormalized*200)+'px)'});
+    $('.site-header .f').css({'transform':'translateX('+(positionNormalized*200)+'px)'});
   }
 
   function animate3D() {
@@ -270,7 +277,7 @@ var Main = (function($) {
 
     // Determine which nine to display based on which 10th of normalized
     var previousNine = currentNine;
-    currentNine = Math.floor(((noralizedPosition+1)/2)*9);
+    currentNine = Math.floor(((positionNormalized+1)/2)*9);
 
     // If we've changed nines, make it so
     if(currentNine !== previousNine) {
@@ -279,16 +286,13 @@ var Main = (function($) {
     }
 
     // Move the camera to the right place
-    camera.position.set (Math.pow(noralizedPosition,3)*2.83+noralizedPosition*4.08, -1.5 , 8); 
+    camera.position.set (Math.pow(positionNormalized,3)*2.83+positionNormalized*4.08, -1.5 , 8); 
     // x,y,z,fov
     // 0,       -8,     -1.5      72.2
     // 1.25,    -8,     -1.5      72.2
     // 2.5,     -8,     -1.5      82.4
     // 4,       -8,     -1.5      82.4
     // 7,       -8,     -1.5      88.4
-
-
-    // 2.828282828 x3 + 0 x2 + 4.080808081 x + 0
 
     // Repoint the camera
     camera.lookAt(new THREE.Vector3( 0, 0 , 0));

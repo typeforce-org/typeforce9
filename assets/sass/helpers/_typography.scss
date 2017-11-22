@@ -15,43 +15,51 @@ $small: 0.5em;
 $med: 1em;
 $big: 3em;
 
-// /* H1 Copy 14: */
-// font-family: $mono;
-// font-weight: normal;
-// font-style: normal;
-// font-size: 150px;
-// letter-spacing: 1.25px;
-// line-height: 1;
+@import url('https://fonts.googleapis.com/css?family=Space+Mono:400,700');
+$mono: 'Space Mono', monospace;
 
-// /* H1 Copy: */
-// font-family: $mono;
-// font-weight: normal;
-// font-style: normal;
-// font-size: 50px;
-// letter-spacing: 0.42px;
-// line-height: 1;
+@mixin font-h1 {
+  font-family: $mono;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 150px;
+  letter-spacing: 1.25px;
+  line-height: 1;
+}
 
-// /* H2 Lorem Ipsum Dolor Copy: */
-// font-family: $mono;
-// font-weight: normal;
-// font-style: normal;
-// font-size: 24px;
-// letter-spacing: 1.14px;
-// line-height: ( 30 / 24 );
+@mixin font-h2 {
+  font-family: $mono;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 50px;
+  letter-spacing: 0.42px;
+  line-height: 1;
+}
 
-// /* H2 Lorem Ipsum Dolor Copy 4: */
-// font-family: $mono;
-// font-style: normal;
-// font-weight: bold;
-// font-size: 14px;
-// text-transform: uppercase;
-// letter-spacing: 1.5px;
-// line-height: ( 20 / 14 );
+@mixin font-h3 {
+  font-family: $mono;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  letter-spacing: 1.14px;
+  line-height: ( 30 / 24 );
+}
 
-// /* Sed nec bibendum aug Copy: */
-// font-family: $mono;
-// font-weight: normal;
-// font-style: normal;
-// font-size: 16px;
-// letter-spacing: 1.14px;
-// line-height: ( 20 / 16 );
+@mixin font-h4 {
+  font-family: $mono;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  line-height: ( 20 / 14 );
+}
+
+@mixin font-paragraph {
+  font-family: $mono;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 16px;
+  letter-spacing: 1.14px;
+  line-height: ( 20 / 16 );
+}
