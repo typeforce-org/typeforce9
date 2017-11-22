@@ -13,7 +13,7 @@
     <meta property="og:image" content="" />
     <meta property="og:url" content="" />
     <meta property="og:description" content="" />
-    <link rel="stylesheet" href="assets/css/main.min.css#<?= time(); ?>">
+    <link rel="stylesheet" href="assets/css/main.min.css?force-reload<?= time(); ?>">
     <link type="text/plain" rel="author" href="humans.txt">
     <link rel="shortcut icon" type="image/ico" href="assets/images/favicon.png">
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="assets/images/apple-touch-icon-152x152-precomposed.png"><!-- For iStuff -->
@@ -47,7 +47,7 @@
       //   document.getElementById('preloadergif').src = preloaderImage.src;
       // }​
     </script>
-    <script src="assets/js/build/site.js#<?= time(); ?>"></script>
+    <script src="assets/js/build/site.js?force-reload<?= time(); ?>"></script>
     <script type="text/javascript">// Google Analytics
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-XXXXX-X']); // Replace "XXXXX-X" with your account code
