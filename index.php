@@ -25,21 +25,29 @@
     <![endif]-->
     <script src="assets/js/no-build/modernizr.custom.js"></script>
   </head>
-  <body data-current-scene="home">
+  <body data-current-page="home">
     <div class="load-mask"><img id="preloadergif" src="/assets/images/preloader.gif" /></div>
-    <header id="home" class="site-header scene">
+    <header id="home" class="site-header page">
       <h1 class="title">
-        <span class="top"><span class="t">T</span></span>
-        <span class="bottom"><span class="f">F</span></span>
+        <span class="t">T</span>
+        <span class="f">F</span>
         <span class="sr-only">9</span>
       </h1>
       <nav class="site-nav">
         <ul class="menu-item-list">
-          <li class="menu-item details"><a href="#details" class="goto-scene" data-target-scene="details">Details</a></li>
-          <li class="menu-item submit"><a href="#submit" class="goto-scene" data-target-scene="submit">Submit</a></li>
+          <li class="menu-item details"><a href="#details" class="goto-page" data-target-page="details">Details</a></li>
+          <li class="menu-item submit"><a href="#submit" class="goto-page" data-target-page="submit">Submit</a></li>
         </ul>
       </nav>
     </header>
+    <main>
+      <section id="details" class="page">
+        <h1>Details</h1>
+      </section>
+      <section id="submit" class="page">
+        <h1>Submit</h1>
+      </section>
+    </main>
     <script type="text/javascript">
       // var preloaderImage = new Image();
       // preloaderImage.src = '/assets/images/preloader.gif';

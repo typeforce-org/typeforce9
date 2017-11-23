@@ -1,34 +1,39 @@
 .site-header {
 
-  .top, .bottom {
-    width: 100%;
-    display: block;
+  .title {
+    top: 0;
+    margin: 0;
+    left: 50%;
+    height: 100%;
     position: absolute;
-    text-align: center;
-    pointer-events: none;
-  }
+    width: calc(100% - 180px);
+    transform: translateX(-50%);
 
-  .top {
-    top: 15vh;
+    @include media-md {
+      width: 500px;
+    }
   }
-
-  .bottom {
-    bottom: 15vh;
-  }
-
+  
   .t, .f {
+    left: 50%;
     color: $blue;
     display: block;
     @include font-h1;
+    position: absolute;
+    transform: translateX(-50%);
   }
 
   .t {
+    top: 18vh;
+
     &::after {
       content: '—';
     }
   }
 
   .f {
+    bottom: 18vh;
+
     &::before {
       content: '—';
     }
@@ -36,24 +41,60 @@
 }
 
 .site-nav {
-  @include font-h3;
   color: $white;
-  .menu-item-list {
-    padding-left: 0;
-    list-style: none;
+  @include font-h4;
+
+  @include media-md {
+    @include font-h3;
   }
-  .menu-item {
+
+  .menu-item-list {
+    bottom: 0;
+    margin: 0;
+    width: 100%;
+    padding: 0 20px;
+    list-style: none;
+    @include clearfix;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    &.details {
-      left: 15vw;
-      transform: rotate(90deg);
-    }
-    &.submit {
-      right: 15vw;
-      transform: rotate(270deg);
+
+    @include media-md {
+      top: 0;
+      left: 50%;
+      width: 80%;
+      height: 100%;
+      bottom: auto;
+      min-width: 600px;
+      transform: translateX(-50%);
     }
   }
 
+  .menu-item {
+    top: 50%;
+    width: 50%;
+    float: left;
+    overflow: auto;
+    text-align: center;
+    display: inline-block;
+
+    a {
+      display: block;
+      padding: 48px 20px;
+    }
+
+    @include media-md {
+      width: auto;
+      position: absolute;
+      transform: translateY(-50%);
+
+      &.details {
+        left: 0;
+        transform: rotate(90deg);
+      }
+
+      &.submit {
+        right: 0;
+        transform: rotate(270deg);
+      }
+    }
+  }
 }
