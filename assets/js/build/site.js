@@ -6366,11 +6366,11 @@ var Main = (function($) {
     });
 
     // Scroll down to hash afer page load
-    $(window).load(function() {
-      // if (window.location.hash) {
-      //   _scrollBody($(window.location.hash)); 
-      // }
-    });
+    // $(window).load(function() {
+    //   if (window.location.hash) {
+    //     _scrollBody($(window.location.hash)); 
+    //   }
+    // });
 
   } // end init()
 
@@ -6610,7 +6610,8 @@ var Main = (function($) {
 
   function initPages() {
     gotoPage('home');
-    $document.on('click','.goto-page', function () {
+    $document.on('click','.goto-page', function (e) {
+      e.preventDefault();
       var page = $(this).attr('data-target-page');
       gotoPage(page);
     });
@@ -6735,7 +6736,7 @@ var Main = (function($) {
     if(currentPage==='details'){
 
       // Set the nine
-      currentNine = 8;
+      currentNine = 0;
 
       // Camera moves slow
       cameraSpeed = 0.5;

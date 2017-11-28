@@ -54,11 +54,11 @@ var Main = (function($) {
     });
 
     // Scroll down to hash afer page load
-    $(window).load(function() {
-      // if (window.location.hash) {
-      //   _scrollBody($(window.location.hash)); 
-      // }
-    });
+    // $(window).load(function() {
+    //   if (window.location.hash) {
+    //     _scrollBody($(window.location.hash)); 
+    //   }
+    // });
 
   } // end init()
 
@@ -298,7 +298,8 @@ var Main = (function($) {
 
   function initPages() {
     gotoPage('home');
-    $document.on('click','.goto-page', function () {
+    $document.on('click','.goto-page', function (e) {
+      e.preventDefault();
       var page = $(this).attr('data-target-page');
       gotoPage(page);
     });

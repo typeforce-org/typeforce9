@@ -41,11 +41,31 @@
       </nav>
     </header>
     <main>
-      <section id="details" class="page">
-        <h1>Details</h1>
+      <section id="details" class="page page-wrap">
+        <h2><span class="tf9">TF-9</span> Details</h2>
+        <h3>Where</h3>
+        <p>3219-21 S Morgan St<br>
+        Chicago, IL 60607</p>
+        <h3>When</h3>
+        <p>02/18 - 03/20</p>
+        <h3>Opening</h3>
+        <p>02/18, 99:99</p>
+        <button class="goto-page back-button" data-target-page="home">Go Back</button>
       </section>
-      <section id="submit" class="page">
-        <h1>Submit</h1>
+      <section id="submit" class="page page-wrap">
+        <div class="scrollbox">
+          <h2><span class="tf9">TF-9</span> Submit</h2>
+          <div class="col">
+            <h3>Deadline</h3>
+            <p>1/9/18</p>
+          </div>
+          <div class="col">
+            <h3>Send to</h3>
+            <a href="mailto:submit@typeforce.com" class="email"><span class="wrap-break">submit</span><span class="wrap-break">@typeforce.com</span></a>
+            <p>Include a PDF file with description of work, approximate size, images of work or previous work if not yet completed. Ideally, we would like a series of pieces or enough work to take up a 10'×10' wall.</p>
+          </div>
+        </div>
+        <button class="goto-page back-button" data-target-page="home">Go Back</button>
       </section>
     </main>
     <script type="text/javascript">
