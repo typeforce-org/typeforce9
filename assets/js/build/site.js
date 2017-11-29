@@ -6865,7 +6865,7 @@ var Main = (function($) {
       if(currentPage !== lastPage) {
         nineRotationDesired = [d2r(-30),d2r(15),d2r(0)]; // -120, 15, 0
         cameraFovDesired = 21;
-        cameraAimYDesired = 0.5;
+        cameraAimYDesired = 0.4;
       }
     }
 

@@ -402,7 +402,7 @@ body {
   color: #F0F0F0;
 }
 
-body, .page, .load-mask {
+body {
   min-width: 320px;
   min-height: 480px;
 }
@@ -496,7 +496,7 @@ body[data-current-page="submit"] #submit {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 750px) {
   .site-header .title {
     width: 500px;
   }
@@ -539,7 +539,7 @@ body[data-current-page="submit"] #submit {
   line-height: 1.42857;
   text-transform: uppercase;
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 750px) {
   .site-nav {
     font-family: "Space Mono", monospace;
     font-weight: normal;
@@ -568,7 +568,7 @@ body[data-current-page="submit"] #submit {
 .site-nav .menu-item-list:after {
   clear: both;
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 750px) {
   .site-nav .menu-item-list {
     top: 0;
     left: 50%;
@@ -592,7 +592,7 @@ body[data-current-page="submit"] #submit {
   display: block;
   padding: 48px 20px;
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 750px) {
   .site-nav .menu-item {
     width: auto;
     position: absolute;
@@ -618,9 +618,6 @@ body[data-current-page="submit"] #submit {
   width: 100%;
   height: 100%;
   position: fixed;
-  top: 0;
-  left: 0;
-  padding: 11% 12.5% 30.6%;
 }
 .page h2 {
   margin: 0;
@@ -632,6 +629,17 @@ body[data-current-page="submit"] #submit {
   line-height: 1.25;
   text-transform: none;
 }
+@media screen and (min-width: 750px) {
+  .page h2 {
+    font-family: "Space Mono", monospace;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 50px;
+    letter-spacing: 0.42px;
+    line-height: 1;
+    text-transform: none;
+  }
+}
 .page h2 .tf9 {
   display: block;
   font-family: "Space Mono", monospace;
@@ -642,6 +650,17 @@ body[data-current-page="submit"] #submit {
   line-height: 1.42857;
   text-transform: uppercase;
 }
+.page h3 + p {
+  margin-top: 0;
+}
+.page p, .page h3 {
+  margin: 20px 0;
+}
+@media screen and (min-width: 750px) {
+  .page p, .page h3 {
+    margin: 30px 0;
+  }
+}
 .page h3 {
   font-family: "Space Mono", monospace;
   font-style: normal;
@@ -651,12 +670,6 @@ body[data-current-page="submit"] #submit {
   line-height: 1.42857;
   text-transform: uppercase;
   margin-bottom: 0;
-}
-.page h3 + p {
-  margin-top: 0;
-}
-.page p {
-  margin: 20px 0;
 }
 .page a, .page a span {
   text-decoration: underline;
@@ -696,11 +709,18 @@ button {
   outline: 0;
   width: 220px;
   height: 40px;
-  margin: 0 0 10px 10px;
   color: #F0F0F0;
+  font-family: "Space Mono", monospace;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  line-height: 1.42857;
+  text-transform: uppercase;
   border-radius: 0;
   background: #000AFF;
   position: relative;
+  margin: 0 0 10px 10px;
   border: 1px solid #090114;
 }
 button::before {
@@ -730,7 +750,38 @@ button::after {
   padding: 0;
 }
 
+#details .content, #submit .content {
+  width: 240px;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+@media screen and (min-width: 750px) {
+  #details .content, #submit .content {
+    position: static;
+    width: 560px;
+  }
+  #details .content .indented, #submit .content .indented {
+    padding-left: 100px;
+  }
+}
 #details .back-button, #submit .back-button {
-  display: inline-block;
-  margin: auto;
+  bottom: 40px;
+  position: absolute;
+}
+
+#details {
+  padding-top: 23vh;
+}
+@media screen and (min-width: 750px) {
+  #details {
+    padding-top: 34vh;
+  }
+}
+@media screen and (min-width: 750px) {
+  #details .back-button {
+    top: calc(34% + 120px);
+    bottom: auto;
+    right: 9.2%;
+  }
 }
