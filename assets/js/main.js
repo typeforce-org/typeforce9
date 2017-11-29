@@ -14,17 +14,19 @@ var Main = (function($) {
   var nines=[], landscapes=[], icosphere, skybox, sykboxLoaded = false;
   var animationStarted = false;
   var currentNine = 4;
-  var sensorPositionNormalized = 0;
-  var sensorPositionNormalized = sensorPositionNormalized;
+  var userX = 0;
+  var userY = 0;
   var currentPage = 'home';
   var lastPage = currentPage;
 
   // Animation Vars
-  var cameraFovDesired = 65;
-  var cameraXDesired = 0;
-  var cameraYDesired = -1.5;
-  var cameraZDesired = 8;
+  var cameraFovDesired = 72.2;
+  var cameraPositionDesired = [0, -1.5, 8];
   var cameraSpeed = 1;
+  var nineRotationDesired = [0,0,0];
+  var landscapeSpeed = 0.8;
+  var nineRotationSpeed = 0.03;
+
 
   function _init() {
     // touch-friendly fast clicks
@@ -114,6 +116,9 @@ var Main = (function($) {
     // Create renderer obj
     renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setSize( window.innerWidth, window.innerHeight );
+
+    var axesHelper = new THREE.AxesHelper( 5 );
+    scene.add( axesHelper );
 
     // Load the things
     loadSkybox();
@@ -211,7 +216,7 @@ var Main = (function($) {
       scene.add(nines[whichNine]);
 
       // Make invisible
-      objVisible(nines[whichNine],false);
+      setObjectVisiblity(nines[whichNine],false);
 
       // Check if all the models have loaded
       checkIfEverythingLoaded();
@@ -240,13 +245,12 @@ var Main = (function($) {
         if (child instanceof THREE.Mesh) {
           child.material = landscapeMaterial;
         }
-        console.log('hi')
       });
 
       // Add to scene
       scene.add(landscapes[whichLandscape]);
 
-      // Make invisible
+      // Send to the depths
       landscapes[whichLandscape].position.y = -20;
 
       // Check if all the models have loaded
@@ -284,10 +288,10 @@ var Main = (function($) {
     initPages();
 
     // Throttled mousewatching (and will be accelerometer tracking)
-    watchPosition();
+    initUserPositioning();
 
     // Make first nine visible
-    objVisible(nines[currentNine],true);
+    setObjectVisiblity(nines[currentNine],true);
 
     // Begin animation/rendering
     animate3D();
@@ -310,7 +314,7 @@ var Main = (function($) {
     $('body').attr('data-current-page',page);
   }
 
-  function watchPosition() {
+  function initUserPositioning() {
 
     var lastMove = 0;
     var eventThrottle = 10;
@@ -326,10 +330,13 @@ var Main = (function($) {
 
         // Get vars
         var mouseX = e.pageX;
+        var mouseY = e.pageY;
         var windowWidth = window.innerWidth;
+        var windowHeight = window.innerHeight;
 
         // Map mouse x position to continuum [-1,1]
-        sensorPositionNormalized = (mouseX/windowWidth)*2-1;
+        userX = (mouseX/windowWidth)*2-1;
+        userY = (mouseY/windowHeight)*2-1;
       }
     });
 
@@ -347,7 +354,8 @@ var Main = (function($) {
           lastMove = now;
 
           // Adjust position based on phone's "roll" (gamma)
-          sensorPositionNormalized = Math.min(Math.max((event.gamma/90)*4,-0.99),0.99); // gamma: left to right
+          userX = Math.min(Math.max((event.gamma/90)*4,-0.99),0.99); // gamma: left to right
+          userY = Math.min(Math.max((event.beta/90)*4,-0.99),0.99); // beta: up and down
 
           // Update UI
           $('.orientation').empty().append(event.gamma);
@@ -357,8 +365,8 @@ var Main = (function($) {
   }
 
   function animateLetters() {
-    $('.site-header .t').css({'left':(-sensorPositionNormalized*50+50)+'%'});
-    $('.site-header .f').css({'left':(sensorPositionNormalized*50+50)+'%'});
+    $('.site-header .t').css({'left':(-userX*50+50)+'%'});
+    $('.site-header .f').css({'left':(userX*50+50)+'%'});
   }
 
   function animate3D() {
@@ -383,19 +391,27 @@ var Main = (function($) {
       cameraSpeed = 2;
 
       // Determine which nine to display based on which 9th of normalized position we are in
-      currentNine = Math.floor(((sensorPositionNormalized+1)/2)*9);
+      currentNine = Math.floor(((userX+0.75)/1.5)*9);
+      if (currentNine < 0) { currentNine = 0; }
+      if (currentNine > 8) { currentNine = 8; }
+      // currentNine = 8; 
 
       // Camera follows sensor
-      cameraXDesired = Math.pow(sensorPositionNormalized,3)*2.83+sensorPositionNormalized*4.08;
-      cameraYDesired = -1.5;
-      cameraZDesired = 8;
+      cameraPositionDesired = [
+        0, //Math.pow(userX,3)*2.83+userX*4.08, 
+        0, //-1.5-(userY*2), 
+        8
+      ];
 
       // Change FOV
-      cameraFovDesired = 65;
+      cameraFovDesired = 72.2;
 
       // Position Landscapes
-      landscapes[0].position.y = animateValue(-20, landscapes[0].position.y, 1);
-      landscapes[1].position.y = animateValue(-20, landscapes[1].position.y, 1);
+      landscapes[0].position.y = animateValue(-20, landscapes[0].position.y, landscapeSpeed);
+      landscapes[1].position.y = animateValue(-20, landscapes[1].position.y, landscapeSpeed);
+
+      // Rotate Nine
+      nineRotationDesired = [0,0,0];
     }
 
     // Submit scene
@@ -408,16 +424,21 @@ var Main = (function($) {
       cameraSpeed = 0.5;
 
       // Camera static position
-      cameraXDesired = 10;
-      cameraYDesired = -1.5;
-      cameraZDesired = 8;
+      cameraPositionDesired = [
+        7+userX/2, 
+        -1.5+userY/2, 
+        8
+      ];
 
       // Change FOV
-      cameraFovDesired = 30;
+      cameraFovDesired = 50; //20 //28.1;
 
       // Position Landscapes
-      landscapes[0].position.y = animateValue(-20, landscapes[0].position.y, 1);
-      landscapes[1].position.y = animateValue(0, landscapes[1].position.y, 1);
+      // landscapes[0].position.y = animateValue(-20, landscapes[0].position.y, landscapeSpeed);
+      // landscapes[1].position.y = animateValue(0, landscapes[1].position.y, landscapeSpeed);
+
+      // Rotate Nine
+      nineRotationDesired = [d2r(-30),-d2r(-25)*2,d2r(40)]; // [d2r(-30),-d2r(-25),d2r(40)]
     }
 
     // Details scene
@@ -430,31 +451,37 @@ var Main = (function($) {
       cameraSpeed = 0.5;
 
       // Camera static position
-      cameraXDesired = -10;
-      cameraYDesired = -1.5;
-      cameraZDesired = 8;
+      cameraPositionDesired = [
+        -7+userX/2, 
+        -1.5+userY/2, 
+        8
+      ];
 
       // Change FOV
-      cameraFovDesired = 30;
+      cameraFovDesired = 20;
 
       // Position Landscapes
-      landscapes[0].position.y = animateValue(0, landscapes[0].position.y, 1);
-      landscapes[1].position.y = animateValue(-20, landscapes[1].position.y, 1);
+      // landscapes[0].position.y = animateValue(-0.5, landscapes[0].position.y, landscapeSpeed);
+      // landscapes[1].position.y = animateValue(-20, landscapes[1].position.y, landscapeSpeed);
+
+
+      // Rotate Nine
+      nineRotationDesired = [d2r(-30),d2r(-6),d2r(12)];
     }
 
     // Now execute/animate the changes
 
     // Change nine model
     if(currentNine !== previousNine) {
-      objVisible(nines[previousNine],false);
-      objVisible(nines[currentNine],true);
+      setObjectVisiblity(nines[previousNine],false);
+      setObjectVisiblity(nines[currentNine],true);
     }
 
     // Animate camera position to desired values
     camera.position.set(
-      animateValue(cameraXDesired,camera.position.x,cameraSpeed), 
-      animateValue(cameraYDesired,camera.position.y,cameraSpeed), 
-      animateValue(cameraZDesired,camera.position.z,cameraSpeed)
+      animateValue(cameraPositionDesired[0],camera.position.x,cameraSpeed), 
+      animateValue(cameraPositionDesired[1],camera.position.y,cameraSpeed), 
+      animateValue(cameraPositionDesired[2],camera.position.z,cameraSpeed)
     ); 
 
     // Animate fov to desired value
@@ -465,6 +492,17 @@ var Main = (function($) {
 
     // Repoint the camera at the nine
     camera.lookAt(new THREE.Vector3( 0, 0 , 0));
+    // console.log('('+camera.rotation.x+', '+camera.rotation.y+', '+camera.rotation.z+')');
+
+    // Rotate every nine model
+    for(i=0;i<9;i++) {
+      nines[i].rotation.set(
+        animateValue(nineRotationDesired[0]+d2r(-90),nines[i].rotation.x,nineRotationSpeed), 
+        animateValue(nineRotationDesired[1],nines[i].rotation.y,nineRotationSpeed), 
+        animateValue(nineRotationDesired[2],nines[i].rotation.z,nineRotationSpeed)
+      ); 
+    }
+    // console.log('('+nines[0].rotation.x+', '+nines[0].rotation.y+', '+nines[0].rotation.z+')');
 
     // Render
     renderer.render( scene, camera );
@@ -496,12 +534,18 @@ var Main = (function($) {
   }
 
   // Turne a Three.js scene object visible or invisible
-  function objVisible(object,visibleOrHidden) {
+  function setObjectVisiblity(object,visibleOrHidden) {
     object.traverse ( function (child) {
       if (child instanceof THREE.Mesh) {
         child.visible = visibleOrHidden;
       }
     });
+  }
+
+  // Convenience function for converting degrees to radians
+  function d2r(degrees) {
+    var radians = degrees * Math.PI/180;
+    return radians;
   }
 
   // Handle resizing 
