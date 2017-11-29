@@ -8,24 +8,35 @@ var Main = (function($) {
       $document,
       loadingTimer;
 
-  // 3D Global Vars
-  // Rendering
+  // Global Vars
+
+  // 3d Rendering
   var camera, scene, renderer;
   var nines=[], landscapes=[], icosphere, skybox, sykboxLoaded = false;
-  var animationStarted = false;
-  var currentNine = 4;
+  var renderingStarted = false;
+
+  // User sensor data
   var userX = 0;
   var userY = 0;
+
+  // Page handling
   var currentPage = 'home';
   var lastPage = currentPage;
 
-  // Animation Vars
+  // Animation
+  var currentNine = 4;
   var cameraFovDesired = 72.2;
   var cameraPositionDesired = [0, -1.5, 8];
   var cameraSpeed = 1;
   var nineRotationDesired = [0,0,0];
   var landscapeSpeed = 0.8;
   var nineRotationSpeed = 0.03;
+
+  // Debugging Options
+  var enableAxis = false;
+  var enableKeyPositioning = false;
+  var landscapeHeight = 0; // Only every used in debugging
+  var cameraAimYDesired = 0;
 
 
   function _init() {
@@ -38,6 +49,9 @@ var Main = (function($) {
     // Set screen size vars
     _resize();
 
+    // Set debugging vars based on query string
+    readQueryVars();
+
     // Init functions
     init3D();
 
@@ -48,34 +62,74 @@ var Main = (function($) {
       }
     });
 
-    // Smoothscroll links
-    $('a.smoothscroll').click(function(e) {
-      e.preventDefault();
-      var href = $(this).attr('href');
-      _scrollBody($(href));
+
+    // Rotation (for debugging)
+    $(document).keydown(function(e) {
+      if(enableKeyPositioning){
+        // q: Nine Rot X-
+        if (e.keyCode === 81) {
+          nineRotationDesired[0]-=d2r(1);
+        }
+
+        // w: Nine Rot X+
+        if (e.keyCode === 87) {
+          nineRotationDesired[0]+=d2r(1);
+        }
+
+        // a: Nine Rot Y-
+        if (e.keyCode === 65) {
+          nineRotationDesired[1]-=d2r(1);
+        }
+
+        // s: Nine Rot Y+
+        if (e.keyCode === 83) {
+          nineRotationDesired[1]+=d2r(1);
+        }
+
+        // z: Nine Rot Z-
+        if (e.keyCode === 90) {
+          nineRotationDesired[2]-=d2r(1);
+        }
+
+        // x: Nine Rot Z+
+        if (e.keyCode === 88) {
+          nineRotationDesired[2]+=d2r(1);
+        }
+
+        // o: FOV-
+        if (e.keyCode === 79) {
+          cameraFovDesired-=1;
+        }
+
+        // p: FOV+
+        if (e.keyCode === 80) {
+          cameraFovDesired+=1;
+        }
+
+        // e: Landscape H-
+        if (e.keyCode === 69) {
+          landscapeHeight-=0.1;
+        }
+
+        // r: Landscape H+
+        if (e.keyCode === 82) {
+          landscapeHeight+=0.1;
+        }
+
+        // d: Camera Aim Y-
+        if (e.keyCode === 68) {
+          cameraAimYDesired-=0.1;
+        }
+
+        // f: Camera Aim Y+
+        if (e.keyCode === 70) {
+          cameraAimYDesired+=0.1;
+        }
+
+      }
     });
 
-    // Scroll down to hash afer page load
-    // $(window).load(function() {
-    //   if (window.location.hash) {
-    //     _scrollBody($(window.location.hash)); 
-    //   }
-    // });
-
   } // end init()
-
-  function _scrollBody(element, duration, delay) {
-    if ($('#wpadminbar').length) {
-      wpOffset = $('#wpadminbar').height();
-    } else {
-      wpOffset = 0;
-    } 
-    element.velocity("scroll", {
-      duration: duration,
-      delay: delay,
-      offset: -wpOffset
-    }, "easeOutSine");
-  }
 
   // Track ajax pages in Analytics
   function _trackPage() {
@@ -95,6 +149,19 @@ var Main = (function($) {
     breakpoint_large = (screenWidth >= breakpoint_array[2]);
 
     resize3D();
+  }
+
+  // Get vars from query string (debugging features)
+  function readQueryVars() {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++){
+      hash = hashes[i].split('=');
+      vars.push(hash[0]);
+      vars[hash[0]] = hash[1];
+    }
+    if ( typeof vars.enableAxis !== 'undefined' ) { enableAxis = vars.enableAxis; }
+    if ( typeof vars.enableKeyPositioning !== 'undefined' ) { enableKeyPositioning = vars.enableKeyPositioning; }
   }
 
   function init3D() {
@@ -117,8 +184,11 @@ var Main = (function($) {
     renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setSize( window.innerWidth, window.innerHeight );
 
-    var axesHelper = new THREE.AxesHelper( 5 );
-    scene.add( axesHelper );
+    // Show Axes helper if dictacted by query vars
+    if(enableAxis){
+      var axesHelper = new THREE.AxesHelper( 5 );
+      scene.add( axesHelper );
+    }
 
     // Load the things
     loadSkybox();
@@ -340,11 +410,11 @@ var Main = (function($) {
       }
     });
 
-    // Adjust position based on accelerometer (if present)
-    if (window.DeviceOrientationEvent) {
+    // Adjust position based on accelerometer (if present and a touch device)
+    if (window.DeviceOrientationEvent && Modernizr.touchevents) {
 
       // UI for testing
-      $('body').append('<div class="orientation"></div>');
+      // $('body').append('<div class="orientation"></div>');
 
       window.addEventListener("deviceorientation", function (event) {
 
@@ -370,7 +440,7 @@ var Main = (function($) {
   }
 
   function animate3D() {
-    animationStarted = true;
+    renderingStarted = true;
 
     // Do this every time the system is ready to animate
     requestAnimationFrame( animate3D );
@@ -394,12 +464,12 @@ var Main = (function($) {
       currentNine = Math.floor(((userX+0.75)/1.5)*9);
       if (currentNine < 0) { currentNine = 0; }
       if (currentNine > 8) { currentNine = 8; }
-      // currentNine = 8; 
+      // currentNine = 8;
 
       // Camera follows sensor
       cameraPositionDesired = [
-        0, //Math.pow(userX,3)*2.83+userX*4.08, 
-        0, //-1.5-(userY*2), 
+        Math.pow(userX,3)*2.83+userX*4.08,
+        -1.5-(userY*2),
         8
       ];
 
@@ -412,6 +482,8 @@ var Main = (function($) {
 
       // Rotate Nine
       nineRotationDesired = [0,0,0];
+
+      cameraAimYDesired = 0;
     }
 
     // Submit scene
@@ -425,20 +497,20 @@ var Main = (function($) {
 
       // Camera static position
       cameraPositionDesired = [
-        7+userX/2, 
-        -1.5+userY/2, 
+        7, //+userX/2,
+        -1.5, //+userY/2,
         8
       ];
 
-      // Change FOV
-      cameraFovDesired = 50; //20 //28.1;
-
       // Position Landscapes
-      // landscapes[0].position.y = animateValue(-20, landscapes[0].position.y, landscapeSpeed);
-      // landscapes[1].position.y = animateValue(0, landscapes[1].position.y, landscapeSpeed);
+      landscapes[0].position.y = animateValue(-20, landscapes[0].position.y, landscapeSpeed);
+      landscapes[1].position.y = animateValue(landscapeHeight, landscapes[1].position.y, landscapeSpeed);
 
-      // Rotate Nine
-      nineRotationDesired = [d2r(-30),-d2r(-25)*2,d2r(40)]; // [d2r(-30),-d2r(-25),d2r(40)]
+      if(currentPage !== lastPage) {
+        nineRotationDesired = [d2r(-35),d2r(50),d2r(0)]; // -125 50 0
+        cameraFovDesired = 21;
+        cameraAimYDesired = 0.5;
+      }
     }
 
     // Details scene
@@ -452,21 +524,20 @@ var Main = (function($) {
 
       // Camera static position
       cameraPositionDesired = [
-        -7+userX/2, 
-        -1.5+userY/2, 
+        -7, //+userX/2,
+        -1.5, //+userY/2,
         8
       ];
 
-      // Change FOV
-      cameraFovDesired = 20;
-
       // Position Landscapes
-      // landscapes[0].position.y = animateValue(-0.5, landscapes[0].position.y, landscapeSpeed);
-      // landscapes[1].position.y = animateValue(-20, landscapes[1].position.y, landscapeSpeed);
+      landscapes[0].position.y = animateValue(landscapeHeight, landscapes[0].position.y, landscapeSpeed);
+      landscapes[1].position.y = animateValue(-20, landscapes[1].position.y, landscapeSpeed);
 
-
-      // Rotate Nine
-      nineRotationDesired = [d2r(-30),d2r(-6),d2r(12)];
+      if(currentPage !== lastPage) {
+        nineRotationDesired = [d2r(-30),d2r(15),d2r(0)]; // -120, 15, 0
+        cameraFovDesired = 21;
+        cameraAimYDesired = 0.5;
+      }
     }
 
     // Now execute/animate the changes
@@ -479,10 +550,10 @@ var Main = (function($) {
 
     // Animate camera position to desired values
     camera.position.set(
-      animateValue(cameraPositionDesired[0],camera.position.x,cameraSpeed), 
-      animateValue(cameraPositionDesired[1],camera.position.y,cameraSpeed), 
+      animateValue(cameraPositionDesired[0],camera.position.x,cameraSpeed),
+      animateValue(cameraPositionDesired[1],camera.position.y,cameraSpeed),
       animateValue(cameraPositionDesired[2],camera.position.z,cameraSpeed)
-    ); 
+    );
 
     // Animate fov to desired value
     if(cameraFovDesired !== camera.fov) {
@@ -491,18 +562,23 @@ var Main = (function($) {
     }
 
     // Repoint the camera at the nine
-    camera.lookAt(new THREE.Vector3( 0, 0 , 0));
+    camera.lookAt(new THREE.Vector3( 0, cameraAimYDesired , 0));
     // console.log('('+camera.rotation.x+', '+camera.rotation.y+', '+camera.rotation.z+')');
 
     // Rotate every nine model
     for(i=0;i<9;i++) {
       nines[i].rotation.set(
-        animateValue(nineRotationDesired[0]+d2r(-90),nines[i].rotation.x,nineRotationSpeed), 
-        animateValue(nineRotationDesired[1],nines[i].rotation.y,nineRotationSpeed), 
+        animateValue(nineRotationDesired[0]+d2r(-90),nines[i].rotation.x,nineRotationSpeed),
+        animateValue(nineRotationDesired[1],nines[i].rotation.y,nineRotationSpeed),
         animateValue(nineRotationDesired[2],nines[i].rotation.z,nineRotationSpeed)
-      ); 
+      );
     }
-    // console.log('('+nines[0].rotation.x+', '+nines[0].rotation.y+', '+nines[0].rotation.z+')');
+    if(enableKeyPositioning) {
+      console.log('Nine Rot: ('+Math.floor(r2d(nines[0].rotation.x))+', '+Math.floor(r2d(nines[0].rotation.y))+', '+Math.floor(r2d(nines[0].rotation.z))+')');
+      console.log('FOV: '+cameraFovDesired);
+      console.log('Landscape h: '+landscapeHeight);
+      console.log('Camera Aim Y: '+cameraAimYDesired);
+    }
 
     // Render
     renderer.render( scene, camera );
@@ -548,11 +624,17 @@ var Main = (function($) {
     return radians;
   }
 
-  // Handle resizing 
+  // Convenience function for converting radians to degrees
+  function r2d(radians) {
+    var degrees = radians * 180/Math.PI;
+    return degrees;
+  }
+
+  // Handle resizing
   function resize3D() {
 
     // If renderer has been set up...
-    if(animationStarted) {
+    if(renderingStarted) {
 
       // Update the camera to reflect new window size
       camera.aspect = window.innerWidth / window.innerHeight;

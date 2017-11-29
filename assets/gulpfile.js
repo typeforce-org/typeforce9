@@ -84,7 +84,7 @@ gulp.task('svgs', function() {
 gulp.task('build', function(callback) {
   runSequence('styles',
               'scripts',
-              ['images', 'svgs', 'svgfallback'],
+              ['images', 'svgs'],
               callback);
 });
 
@@ -103,7 +103,7 @@ gulp.task('watch', function() {
   // Watch js files
   gulp.watch(['js/libs/*.js', 'js/main.js'], ['scripts']);
   // Watch SVGs
-  gulp.watch(paths.svgSrc, ['svgs', 'svgfallback']);
+  gulp.watch(paths.svgSrc, ['svgs']);
 });
 
 // Make watch the default task

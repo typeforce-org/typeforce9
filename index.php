@@ -16,9 +16,6 @@
     <link rel="stylesheet" href="assets/css/main.min.css?force-reload<?= time(); ?>">
     <link type="text/plain" rel="author" href="humans.txt">
     <link rel="shortcut icon" type="image/ico" href="assets/images/favicon.png">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="assets/images/apple-touch-icon-152x152-precomposed.png"><!-- For iStuff -->
-    <meta name="msapplication-TileColor" content="#FFFFFF"><!-- For MS stuff -->
-    <meta name="msapplication-TileImage" content="assets/images/ms-icon.png"><!-- For MS stuff -->
     <!--[if lt IE 9]>
       <script src="assets/js/no-build/respond.min.js"></script>
       <script src="assets/js/no-build/svg4everybody.min.js"></script>
