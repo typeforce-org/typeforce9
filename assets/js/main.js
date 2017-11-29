@@ -475,7 +475,7 @@ var Main = (function($) {
       cameraSpeed = 2;
 
       // Determine which nine to display based on which 9th of normalized position we are in
-      currentNine = Math.floor(((userX+0.75)/1.5)*9);
+      currentNine = Math.floor(((userX+0.70)/1.4)*9);
       if (currentNine < 0) { currentNine = 0; }
       if (currentNine > 8) { currentNine = 8; }
       // currentNine = 8;
