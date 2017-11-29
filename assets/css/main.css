@@ -385,6 +385,7 @@ table {
 
 html {
   box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -483,7 +484,6 @@ body[data-current-page="submit"] #submit {
   color: #F0F0F0;
   height: 100px;
   position: fixed;
-  display: none;
 }
 
 .site-header .title {
@@ -694,17 +694,36 @@ body[data-current-page="submit"] #submit {
 
 button {
   outline: 0;
-  width: 230px;
-  height: 50px;
+  width: 220px;
+  height: 40px;
+  margin: 0 0 10px 10px;
   color: #F0F0F0;
   border-radius: 0;
   background: #000AFF;
+  position: relative;
   border: 1px solid #090114;
-  border-left: 10px solid #090114;
-  border-bottom: 10px solid #090114;
+}
+button::before {
+  right: 100%;
+  top: 4px;
+  content: '';
+  width: 10px;
+  background: #090114;
+  position: absolute;
+  height: calc(100% + 1px);
+  -webkit-transform: skewY(-45deg);
+          transform: skewY(-45deg);
 }
 button::after {
+  top: 100%;
+  left: -5px;
   content: '';
+  height: 10px;
+  background: #090114;
+  position: absolute;
+  width: calc(100% + 1px);
+  -webkit-transform: skewX(-45deg);
+          transform: skewX(-45deg);
 }
 
 #home {

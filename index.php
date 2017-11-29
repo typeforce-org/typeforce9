@@ -16,11 +16,6 @@
     <link rel="stylesheet" href="assets/css/main.min.css?force-reload<?= time(); ?>">
     <link type="text/plain" rel="author" href="humans.txt">
     <link rel="shortcut icon" type="image/ico" href="assets/images/favicon.png">
-    <!--[if lt IE 9]>
-      <script src="assets/js/no-build/respond.min.js"></script>
-      <script src="assets/js/no-build/svg4everybody.min.js"></script>
-    <![endif]-->
-    <script src="assets/js/no-build/modernizr.custom.js"></script>
   </head>
   <body data-current-page="home">
     <div class="load-mask"><img id="preloadergif" src="/assets/images/preloader.gif" /></div>

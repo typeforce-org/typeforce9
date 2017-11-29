@@ -846,8 +846,8 @@ return b?(parseFloat(Sa(a,"marginLeft"))||(n.contains(a.ownerDocument,a)?a.getBo
 })}),n.each({Height:"height",Width:"width"},function(a,b){n.each({padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){var f=arguments.length&&(c||"boolean"!=typeof d),g=c||(d===!0||e===!0?"margin":"border");return Y(this,function(b,c,d){var e;return n.isWindow(b)?b.document.documentElement["client"+a]:9===b.nodeType?(e=b.documentElement,Math.max(b.body["scroll"+a],e["scroll"+a],b.body["offset"+a],e["offset"+a],e["client"+a])):void 0===d?n.css(b,c,g):n.style(b,c,d,g)},b,f?d:void 0,f,null)}})}),n.fn.extend({bind:function(a,b,c){return this.on(a,null,b,c)},unbind:function(a,b){return this.off(a,null,b)},delegate:function(a,b,c,d){return this.on(b,a,c,d)},undelegate:function(a,b,c){return 1===arguments.length?this.off(a,"**"):this.off(b,a||"**",c)}}),n.fn.size=function(){return this.length},n.fn.andSelf=n.fn.addBack,"function"==typeof define&&define.amd&&define("jquery",[],function(){return n});var nc=a.jQuery,oc=a.$;return n.noConflict=function(b){return a.$===n&&(a.$=oc),b&&a.jQuery===n&&(a.jQuery=nc),n},b||(a.jQuery=a.$=n),n});
 
 /*! modernizr 3.5.0 (Custom Build) | MIT *
- * https://modernizr.com/download/?-setclasses !*/
-!function(n,e,s){function o(n,e){return typeof n===e}function a(){var n,e,s,a,i,l,r;for(var c in f)if(f.hasOwnProperty(c)){if(n=[],e=f[c],e.name&&(n.push(e.name.toLowerCase()),e.options&&e.options.aliases&&e.options.aliases.length))for(s=0;s<e.options.aliases.length;s++)n.push(e.options.aliases[s].toLowerCase());for(a=o(e.fn,"function")?e.fn():e.fn,i=0;i<n.length;i++)l=n[i],r=l.split("."),1===r.length?Modernizr[r[0]]=a:(!Modernizr[r[0]]||Modernizr[r[0]]instanceof Boolean||(Modernizr[r[0]]=new Boolean(Modernizr[r[0]])),Modernizr[r[0]][r[1]]=a),t.push((a?"":"no-")+r.join("-"))}}function i(n){var e=r.className,s=Modernizr._config.classPrefix||"";if(c&&(e=e.baseVal),Modernizr._config.enableJSClass){var o=new RegExp("(^|\\s)"+s+"no-js(\\s|$)");e=e.replace(o,"$1"+s+"js$2")}Modernizr._config.enableClasses&&(e+=" "+s+n.join(" "+s),c?r.className.baseVal=e:r.className=e)}var t=[],f=[],l={_version:"3.5.0",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(n,e){var s=this;setTimeout(function(){e(s[n])},0)},addTest:function(n,e,s){f.push({name:n,fn:e,options:s})},addAsyncTest:function(n){f.push({name:null,fn:n})}},Modernizr=function(){};Modernizr.prototype=l,Modernizr=new Modernizr;var r=e.documentElement,c="svg"===r.nodeName.toLowerCase();a(),i(t),delete l.addTest,delete l.addAsyncTest;for(var u=0;u<Modernizr._q.length;u++)Modernizr._q[u]();n.Modernizr=Modernizr}(window,document);
+ * https://modernizr.com/download/?-touchevents-setclasses !*/
+!function(e,n,t){function o(e,n){return typeof e===n}function s(){var e,n,t,s,a,i,r;for(var l in c)if(c.hasOwnProperty(l)){if(e=[],n=c[l],n.name&&(e.push(n.name.toLowerCase()),n.options&&n.options.aliases&&n.options.aliases.length))for(t=0;t<n.options.aliases.length;t++)e.push(n.options.aliases[t].toLowerCase());for(s=o(n.fn,"function")?n.fn():n.fn,a=0;a<e.length;a++)i=e[a],r=i.split("."),1===r.length?Modernizr[r[0]]=s:(!Modernizr[r[0]]||Modernizr[r[0]]instanceof Boolean||(Modernizr[r[0]]=new Boolean(Modernizr[r[0]])),Modernizr[r[0]][r[1]]=s),f.push((s?"":"no-")+r.join("-"))}}function a(e){var n=u.className,t=Modernizr._config.classPrefix||"";if(p&&(n=n.baseVal),Modernizr._config.enableJSClass){var o=new RegExp("(^|\\s)"+t+"no-js(\\s|$)");n=n.replace(o,"$1"+t+"js$2")}Modernizr._config.enableClasses&&(n+=" "+t+e.join(" "+t),p?u.className.baseVal=n:u.className=n)}function i(){return"function"!=typeof n.createElement?n.createElement(arguments[0]):p?n.createElementNS.call(n,"http://www.w3.org/2000/svg",arguments[0]):n.createElement.apply(n,arguments)}function r(){var e=n.body;return e||(e=i(p?"svg":"body"),e.fake=!0),e}function l(e,t,o,s){var a,l,f,c,d="modernizr",p=i("div"),h=r();if(parseInt(o,10))for(;o--;)f=i("div"),f.id=s?s[o]:d+(o+1),p.appendChild(f);return a=i("style"),a.type="text/css",a.id="s"+d,(h.fake?h:p).appendChild(a),h.appendChild(p),a.styleSheet?a.styleSheet.cssText=e:a.appendChild(n.createTextNode(e)),p.id=d,h.fake&&(h.style.background="",h.style.overflow="hidden",c=u.style.overflow,u.style.overflow="hidden",u.appendChild(h)),l=t(p,e),h.fake?(h.parentNode.removeChild(h),u.style.overflow=c,u.offsetHeight):p.parentNode.removeChild(p),!!l}var f=[],c=[],d={_version:"3.5.0",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(e,n){var t=this;setTimeout(function(){n(t[e])},0)},addTest:function(e,n,t){c.push({name:e,fn:n,options:t})},addAsyncTest:function(e){c.push({name:null,fn:e})}},Modernizr=function(){};Modernizr.prototype=d,Modernizr=new Modernizr;var u=n.documentElement,p="svg"===u.nodeName.toLowerCase(),h=d._config.usePrefixes?" -webkit- -moz- -o- -ms- ".split(" "):["",""];d._prefixes=h;var m=d.testStyles=l;Modernizr.addTest("touchevents",function(){var t;if("ontouchstart"in e||e.DocumentTouch&&n instanceof DocumentTouch)t=!0;else{var o=["@media (",h.join("touch-enabled),("),"heartz",")","{#modernizr{top:9px;position:absolute}}"].join("");m(o,function(e){t=9===e.offsetTop})}return t}),s(),a(f),delete d.addTest,delete d.addAsyncTest;for(var v=0;v<Modernizr._q.length;v++)Modernizr._q[v]();e.Modernizr=Modernizr}(window,document);
 // threejs.org/license
 (function(m,ja){"object"===typeof exports&&"undefined"!==typeof module?ja(exports):"function"===typeof define&&define.amd?define(["exports"],ja):ja(m.THREE=m.THREE||{})})(this,function(m){function ja(){}function C(a,b){this.x=a||0;this.y=b||0}function K(){this.elements=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];0<arguments.length&&console.error("THREE.Matrix4: the constructor no longer reads arguments. use .set() instead.")}function Z(a,b,c,d){this._x=a||0;this._y=b||0;this._z=c||0;this._w=void 0!==d?d:1}
 function p(a,b,c){this.x=a||0;this.y=b||0;this.z=c||0}function ra(){this.elements=[1,0,0,0,1,0,0,0,1];0<arguments.length&&console.error("THREE.Matrix3: the constructor no longer reads arguments. use .set() instead.")}function ea(a,b,c,d,e,f,g,h,k,l){Object.defineProperty(this,"id",{value:kf++});this.uuid=R.generateUUID();this.name="";this.image=void 0!==a?a:ea.DEFAULT_IMAGE;this.mipmaps=[];this.mapping=void 0!==b?b:ea.DEFAULT_MAPPING;this.wrapS=void 0!==c?c:1001;this.wrapT=void 0!==d?d:1001;this.magFilter=
@@ -6346,12 +6346,15 @@ var Main = (function($) {
   var nineRotationDesired = [0,0,0];
   var landscapeSpeed = 0.8;
   var nineRotationSpeed = 0.03;
+  var landscapeHiddenHeight = -20;
+  var cameraAimYDesired = 0;
+  var cameraAimYPrevious = 0;
 
   // Debugging Options
   var enableAxis = false;
   var enableKeyPositioning = false;
+  var displayOrientation = false;
   var landscapeHeight = 0; // Only every used in debugging
-  var cameraAimYDesired = 0;
 
 
   function _init() {
@@ -6365,7 +6368,7 @@ var Main = (function($) {
     _resize();
 
     // Set debugging vars based on query string
-    readQueryVars();
+    readDebuggingVars();
 
     // Init functions
     init3D();
@@ -6467,7 +6470,7 @@ var Main = (function($) {
   }
 
   // Get vars from query string (debugging features)
-  function readQueryVars() {
+  function readDebuggingVars() {
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     for(var i = 0; i < hashes.length; i++){
@@ -6477,6 +6480,8 @@ var Main = (function($) {
     }
     if ( typeof vars.enableAxis !== 'undefined' ) { enableAxis = vars.enableAxis; }
     if ( typeof vars.enableKeyPositioning !== 'undefined' ) { enableKeyPositioning = vars.enableKeyPositioning; }
+    if ( typeof vars.displayOrientation !== 'undefined' ) { displayOrientation = vars.displayOrientation; }
+    console.log(displayOrientation);
   }
 
   function init3D() {
@@ -6636,7 +6641,7 @@ var Main = (function($) {
       scene.add(landscapes[whichLandscape]);
 
       // Send to the depths
-      landscapes[whichLandscape].position.y = -20;
+      landscapes[whichLandscape].position.y = landscapeHiddenHeight;
 
       // Check if all the models have loaded
       checkIfEverythingLoaded();
@@ -6725,11 +6730,13 @@ var Main = (function($) {
       }
     });
 
+    // UI for testing
+    if(displayOrientation) { $('body').append('<div class="orientation"></div>'); }
+
+    console.log(Modernizr);
+
     // Adjust position based on accelerometer (if present and a touch device)
     if (window.DeviceOrientationEvent && Modernizr.touchevents) {
-
-      // UI for testing
-      // $('body').append('<div class="orientation"></div>');
 
       window.addEventListener("deviceorientation", function (event) {
 
@@ -6738,14 +6745,21 @@ var Main = (function($) {
         if (now > lastMove + eventThrottle) {
           lastMove = now;
 
-          // Adjust position based on phone's "roll" (gamma)
-          userX = Math.min(Math.max((event.gamma/90)*4,-0.99),0.99); // gamma: left to right
-          userY = Math.min(Math.max((event.beta/90)*4,-0.99),0.99); // beta: up and down
-
           // Update UI
-          $('.orientation').empty().append(event.gamma);
+          if(displayOrientation) {
+            $('.orientation').empty().append('Gamma: '+event.gamma.toFixed(2)+'<br>userX: '+userX+'<br>Beta: '+event.beta.toFixed(2)+'<br>userY: '+userY+'<br>');
+          }
+
+          // Adjust position based on phone's "roll" (gamma)
+          userX = -Math.min(Math.max((event.gamma/90)*4,-0.99),0.99); // gamma: left to right
+          userY = -Math.min(Math.max((event.beta/90),-0.99),0.99)*2; // beta: up and down
+
         }
       }, false);
+    } else {
+      if (displayOrientation) {
+        $('.orientation').empty().append((window.DeviceOrientationEvent ? 'Orientation Supported<br>': 'No Orientation Event<br>')+(Modernizr.touchevents ? 'Touch': 'No Touch'));
+      }
     }
   }
 
@@ -6792,8 +6806,8 @@ var Main = (function($) {
       cameraFovDesired = 72.2;
 
       // Position Landscapes
-      landscapes[0].position.y = animateValue(-20, landscapes[0].position.y, landscapeSpeed);
-      landscapes[1].position.y = animateValue(-20, landscapes[1].position.y, landscapeSpeed);
+      landscapes[0].position.y = animateValue(landscapeHiddenHeight, landscapes[0].position.y, landscapeSpeed);
+      landscapes[1].position.y = animateValue(landscapeHiddenHeight, landscapes[1].position.y, landscapeSpeed);
 
       // Rotate Nine
       nineRotationDesired = [0,0,0];
@@ -6812,13 +6826,13 @@ var Main = (function($) {
 
       // Camera static position
       cameraPositionDesired = [
-        7, //+userX/2,
-        -1.5, //+userY/2,
+        7+userX/2,
+        -1.5+userY/2,
         8
       ];
 
       // Position Landscapes
-      landscapes[0].position.y = animateValue(-20, landscapes[0].position.y, landscapeSpeed);
+      landscapes[0].position.y = animateValue(landscapeHiddenHeight, landscapes[0].position.y, landscapeSpeed);
       landscapes[1].position.y = animateValue(landscapeHeight, landscapes[1].position.y, landscapeSpeed);
 
       if(currentPage !== lastPage) {
@@ -6839,14 +6853,14 @@ var Main = (function($) {
 
       // Camera static position
       cameraPositionDesired = [
-        -7, //+userX/2,
-        -1.5, //+userY/2,
+        -7+userX/2,
+        -1.5+userY/2,
         8
       ];
 
       // Position Landscapes
       landscapes[0].position.y = animateValue(landscapeHeight, landscapes[0].position.y, landscapeSpeed);
-      landscapes[1].position.y = animateValue(-20, landscapes[1].position.y, landscapeSpeed);
+      landscapes[1].position.y = animateValue(landscapeHiddenHeight, landscapes[1].position.y, landscapeSpeed);
 
       if(currentPage !== lastPage) {
         nineRotationDesired = [d2r(-30),d2r(15),d2r(0)]; // -120, 15, 0
@@ -6877,7 +6891,9 @@ var Main = (function($) {
     }
 
     // Repoint the camera at the nine
-    camera.lookAt(new THREE.Vector3( 0, cameraAimYDesired , 0));
+    var cameraAimYCurrent = animateValue(cameraAimYDesired, cameraAimYPrevious, 0.05);
+    camera.lookAt(new THREE.Vector3( 0, cameraAimYCurrent , 0));
+    cameraAimYPrevious = cameraAimYCurrent;
     // console.log('('+camera.rotation.x+', '+camera.rotation.y+', '+camera.rotation.z+')');
 
     // Rotate every nine model

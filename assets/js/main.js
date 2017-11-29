@@ -31,12 +31,15 @@ var Main = (function($) {
   var nineRotationDesired = [0,0,0];
   var landscapeSpeed = 0.8;
   var nineRotationSpeed = 0.03;
+  var landscapeHiddenHeight = -20;
+  var cameraAimYDesired = 0;
+  var cameraAimYPrevious = 0;
 
   // Debugging Options
   var enableAxis = false;
   var enableKeyPositioning = false;
+  var displayOrientation = false;
   var landscapeHeight = 0; // Only every used in debugging
-  var cameraAimYDesired = 0;
 
 
   function _init() {
@@ -50,7 +53,7 @@ var Main = (function($) {
     _resize();
 
     // Set debugging vars based on query string
-    readQueryVars();
+    readDebuggingVars();
 
     // Init functions
     init3D();
@@ -152,7 +155,7 @@ var Main = (function($) {
   }
 
   // Get vars from query string (debugging features)
-  function readQueryVars() {
+  function readDebuggingVars() {
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     for(var i = 0; i < hashes.length; i++){
@@ -162,6 +165,8 @@ var Main = (function($) {
     }
     if ( typeof vars.enableAxis !== 'undefined' ) { enableAxis = vars.enableAxis; }
     if ( typeof vars.enableKeyPositioning !== 'undefined' ) { enableKeyPositioning = vars.enableKeyPositioning; }
+    if ( typeof vars.displayOrientation !== 'undefined' ) { displayOrientation = vars.displayOrientation; }
+    console.log(displayOrientation);
   }
 
   function init3D() {
@@ -321,7 +326,7 @@ var Main = (function($) {
       scene.add(landscapes[whichLandscape]);
 
       // Send to the depths
-      landscapes[whichLandscape].position.y = -20;
+      landscapes[whichLandscape].position.y = landscapeHiddenHeight;
 
       // Check if all the models have loaded
       checkIfEverythingLoaded();
@@ -410,11 +415,13 @@ var Main = (function($) {
       }
     });
 
+    // UI for testing
+    if(displayOrientation) { $('body').append('<div class="orientation"></div>'); }
+
+    console.log(Modernizr);
+
     // Adjust position based on accelerometer (if present and a touch device)
     if (window.DeviceOrientationEvent && Modernizr.touchevents) {
-
-      // UI for testing
-      // $('body').append('<div class="orientation"></div>');
 
       window.addEventListener("deviceorientation", function (event) {
 
@@ -423,14 +430,21 @@ var Main = (function($) {
         if (now > lastMove + eventThrottle) {
           lastMove = now;
 
-          // Adjust position based on phone's "roll" (gamma)
-          userX = Math.min(Math.max((event.gamma/90)*4,-0.99),0.99); // gamma: left to right
-          userY = Math.min(Math.max((event.beta/90)*4,-0.99),0.99); // beta: up and down
-
           // Update UI
-          $('.orientation').empty().append(event.gamma);
+          if(displayOrientation) {
+            $('.orientation').empty().append('Gamma: '+event.gamma.toFixed(2)+'<br>userX: '+userX+'<br>Beta: '+event.beta.toFixed(2)+'<br>userY: '+userY+'<br>');
+          }
+
+          // Adjust position based on phone's "roll" (gamma)
+          userX = -Math.min(Math.max((event.gamma/90)*4,-0.99),0.99); // gamma: left to right
+          userY = -Math.min(Math.max((event.beta/90),-0.99),0.99)*2; // beta: up and down
+
         }
       }, false);
+    } else {
+      if (displayOrientation) {
+        $('.orientation').empty().append((window.DeviceOrientationEvent ? 'Orientation Supported<br>': 'No Orientation Event<br>')+(Modernizr.touchevents ? 'Touch': 'No Touch'));
+      }
     }
   }
 
@@ -477,8 +491,8 @@ var Main = (function($) {
       cameraFovDesired = 72.2;
 
       // Position Landscapes
-      landscapes[0].position.y = animateValue(-20, landscapes[0].position.y, landscapeSpeed);
-      landscapes[1].position.y = animateValue(-20, landscapes[1].position.y, landscapeSpeed);
+      landscapes[0].position.y = animateValue(landscapeHiddenHeight, landscapes[0].position.y, landscapeSpeed);
+      landscapes[1].position.y = animateValue(landscapeHiddenHeight, landscapes[1].position.y, landscapeSpeed);
 
       // Rotate Nine
       nineRotationDesired = [0,0,0];
@@ -497,13 +511,13 @@ var Main = (function($) {
 
       // Camera static position
       cameraPositionDesired = [
-        7, //+userX/2,
-        -1.5, //+userY/2,
+        7+userX/2,
+        -1.5+userY/2,
         8
       ];
 
       // Position Landscapes
-      landscapes[0].position.y = animateValue(-20, landscapes[0].position.y, landscapeSpeed);
+      landscapes[0].position.y = animateValue(landscapeHiddenHeight, landscapes[0].position.y, landscapeSpeed);
       landscapes[1].position.y = animateValue(landscapeHeight, landscapes[1].position.y, landscapeSpeed);
 
       if(currentPage !== lastPage) {
@@ -524,14 +538,14 @@ var Main = (function($) {
 
       // Camera static position
       cameraPositionDesired = [
-        -7, //+userX/2,
-        -1.5, //+userY/2,
+        -7+userX/2,
+        -1.5+userY/2,
         8
       ];
 
       // Position Landscapes
       landscapes[0].position.y = animateValue(landscapeHeight, landscapes[0].position.y, landscapeSpeed);
-      landscapes[1].position.y = animateValue(-20, landscapes[1].position.y, landscapeSpeed);
+      landscapes[1].position.y = animateValue(landscapeHiddenHeight, landscapes[1].position.y, landscapeSpeed);
 
       if(currentPage !== lastPage) {
         nineRotationDesired = [d2r(-30),d2r(15),d2r(0)]; // -120, 15, 0
@@ -562,7 +576,9 @@ var Main = (function($) {
     }
 
     // Repoint the camera at the nine
-    camera.lookAt(new THREE.Vector3( 0, cameraAimYDesired , 0));
+    var cameraAimYCurrent = animateValue(cameraAimYDesired, cameraAimYPrevious, 0.05);
+    camera.lookAt(new THREE.Vector3( 0, cameraAimYCurrent , 0));
+    cameraAimYPrevious = cameraAimYCurrent;
     // console.log('('+camera.rotation.x+', '+camera.rotation.y+', '+camera.rotation.z+')');
 
     // Rotate every nine model

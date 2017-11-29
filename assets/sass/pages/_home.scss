@@ -32,7 +32,7 @@
     margin-top: 0;
   }
 
-  p { 
+  p {
     margin: 20px 0;
   }
 
@@ -78,17 +78,35 @@
 
 button {
   outline: 0;
-  width: 230px;
-  height: 50px;
+  width: 220px;
+  height: 40px;
+  margin: 0 0 10px 10px;
   color: $white;
   border-radius: 0;
   background: $blue;
+  position: relative;
   border: 1px solid $black;
-  border-left: 10px solid $black;
-  border-bottom: 10px solid $black;
+
+  &::before {
+    right: 100%;
+    top: 4px;
+    content: '';
+    width: 10px;
+    background: $black;
+    position: absolute;
+    height: calc(100% + 1px);
+    transform: skewY(-45deg);
+  }
 
   &::after {
+    top: 100%;
+    left: -5px;
     content: '';
+    height: 10px;
+    background: $black;
+    position: absolute;
+    width: calc(100% + 1px);
+    transform: skewX(-45deg);
   }
   // display: none;
 }
@@ -106,7 +124,7 @@ button {
 }
 
 #details {
-  
+
 }
 
 #submit {
