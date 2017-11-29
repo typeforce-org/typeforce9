@@ -45,7 +45,7 @@
             <h3>Opening</h3>
             <p>02/18, 99:99</p>
           </div>
-          <button class="goto-page back-button" data-target-page="home">Go Back</button>
+          <button class="goto-page back-button" data-target-page="home">Go Back &gt;</button>
         </div>
       </section>
       <section id="submit" class="page page-wrap">
@@ -62,7 +62,7 @@
               <p>Include a PDF file with description of work, approximate size, images of work or previous work if not yet completed. Ideally, we would like a series of pieces or enough work to take up a 10'×10' wall.</p>
             </div>
           </div>
-          <button class="goto-page back-button" data-target-page="home">Go Back</button>
+          <button class="goto-page back-button" data-target-page="home">&lt; Go Back</button>
         </div>
       </section>
     </main>
