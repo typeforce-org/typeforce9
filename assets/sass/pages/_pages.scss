@@ -1,0 +1,92 @@
+// Home page
+
+.page {
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#home {
+  padding: 0;
+}
+
+#details, #submit {
+
+  .content {
+    width: 240px;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+
+    @include media-md {
+      width: 560px;
+      .indented {
+        padding-left: 100px;
+      }
+      .col {
+        float: left;
+        &:first-of-type {
+          width: 200px;
+        }
+        &:nth-of-type(2) {
+          width: calc(100% - 200px);
+        }
+      }
+    }
+  }
+}
+
+#details {
+  padding-top: 23vh;
+
+  @include media-md {
+    padding-top: 34vh;
+  }
+
+  .content {
+    @include media-md {
+      position: static;
+    }
+  }
+
+  .back-button {
+    width: 240px;
+    bottom: 40px;
+    position: absolute;
+
+    @include media-md {
+      right: 9.2%;
+      bottom: auto;
+      width: 230px;
+      top: calc(34% + 120px);
+    }
+  }
+}
+
+#submit {
+  padding-top: 12.5vh;
+  padding-bottom: 130px;
+
+  @include media-md {
+    padding-top: 37vh;
+    padding-bottom: 0;
+  }
+
+  .back-button {
+    width: 220px;
+    position: absolute;
+    top: calc(100% + 40px);
+
+    @include media-md {
+      right: 112.5%;
+      bottom: auto;
+      width: 230px;
+      top: 100px;
+    }
+  }
+}
