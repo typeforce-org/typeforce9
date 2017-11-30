@@ -79,6 +79,10 @@
     a {
       display: block;
       padding: 48px 20px;
+
+      &:hover {
+        color: $blue;
+      }
     }
 
     @include media-md {
