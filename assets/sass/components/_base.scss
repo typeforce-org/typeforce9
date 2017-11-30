@@ -92,7 +92,18 @@ p {
     position: absolute;
     transform: translate(-50%,-50%);
   }
+  #loading-progress-bar {
+    width: 0; // full width: 200px
+    left: 50%;
+    height: 5px;
+    background: $blue;
+    position: absolute;
+    transition: width 0.15s;
+    top: calc(50% + 150px);
+    left: calc(50% - 100px);
+  }
 }
+
 body.loaded {
   .load-mask {
     opacity: 0;

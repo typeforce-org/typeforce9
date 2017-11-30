@@ -14,6 +14,7 @@ var Main = (function($) {
   var camera, scene, renderer;
   var nines=[], landscapes=[], icosphere, skybox, sykboxLoaded = false;
   var renderingStarted = false;
+  var loadingProgress = 0;
 
   // User sensor data
   var userX = 0;
@@ -344,6 +345,11 @@ var Main = (function($) {
   }
 
   function checkIfEverythingLoaded() {
+
+    loadingProgress += 1/13;
+    $('#loading-progress-bar').attr('style','width: '+(Math.min(loadingProgress*200,200))+'px;')
+
+
     // Check to see if each model is loaded (if its associated global var is not empty)
     // and whether the skybox images have loaded (handled by boolean sykboxLoaded)
     if (

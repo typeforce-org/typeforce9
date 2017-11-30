@@ -504,6 +504,16 @@ p {
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
+.load-mask #loading-progress-bar {
+  width: 0;
+  left: 50%;
+  height: 5px;
+  background: #000AFF;
+  position: absolute;
+  transition: width 0.15s;
+  top: calc(50% + 150px);
+  left: calc(50% - 100px);
+}
 
 body.loaded .load-mask {
   opacity: 0;
