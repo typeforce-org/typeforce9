@@ -6323,7 +6323,7 @@ var Main = (function($) {
       $document,
       loadingTimer;
 
-  // Global Vars
+  // TOO MANY Global Vars
 
   // 3d Rendering
   var camera, scene, renderer;
@@ -6339,22 +6339,26 @@ var Main = (function($) {
   var lastPage = currentPage;
 
   // Animation
-  var currentNine = 4;
+  var currentNineModel = 4;
   var cameraFovDesired = 72.2;
   var cameraPositionDesired = [0, -1.5, 8];
   var cameraSpeed = 1;
-  var nineRotationDesired = [0,0,0];
+  var nineRotationDesired = [0+d2r(-90),0,0]; // For some reason needs a 90 deg correction in x axis, been meaning to solve that mystery, think it has to do with collada import
   var landscapeSpeed = 0.8;
   var nineRotationSpeed = 0.03;
-  var landscapeHiddenHeight = -20;
+  var landscapePositionYHidden = -20;
   var cameraAimYDesired = 0;
   var cameraAimYPrevious = 0;
+  var landscape0PositionYDesired = landscapePositionYHidden;
+  var landscape1PositionYDesired = landscapePositionYHidden;
 
-  // Debugging Options
+  // Debugging Options / Vars
   var enableAxis = false;
   var enableKeyPositioning = false;
   var displayOrientation = false;
-  var landscapeHeight = 0; // Only every used in debugging
+  var displayOrientation = false;
+  var forceAssetReload = false;
+  var assetHash = ''; // To force reload of 3d assets in debugging via a query string
 
 
   function _init() {
@@ -6381,7 +6385,7 @@ var Main = (function($) {
     });
 
 
-    // Rotation (for debugging)
+    // ?enableKeyPositioning=true enables key press positioning/rotation of tricky elements (for debugging)
     $(document).keydown(function(e) {
       if(enableKeyPositioning){
         // q: Nine Rot X-
@@ -6424,16 +6428,6 @@ var Main = (function($) {
           cameraFovDesired+=1;
         }
 
-        // e: Landscape H-
-        if (e.keyCode === 69) {
-          landscapeHeight-=0.1;
-        }
-
-        // r: Landscape H+
-        if (e.keyCode === 82) {
-          landscapeHeight+=0.1;
-        }
-
         // d: Camera Aim Y-
         if (e.keyCode === 68) {
           cameraAimYDesired-=0.1;
@@ -6443,6 +6437,11 @@ var Main = (function($) {
         if (e.keyCode === 70) {
           cameraAimYDesired+=0.1;
         }
+
+        // Notify user of new values
+        console.log('Nine Rot: ('+Math.floor(r2d(nines[0].rotation.x))+', '+Math.floor(r2d(nines[0].rotation.y))+', '+Math.floor(r2d(nines[0].rotation.z))+')');
+        console.log('FOV: '+cameraFovDesired);
+        console.log('Camera Aim Y: '+cameraAimYDesired);
 
       }
     });
@@ -6469,8 +6468,10 @@ var Main = (function($) {
     resize3D();
   }
 
-  // Get vars from query string (debugging features)
+  // Built a bunch of debugging features that can be accessed by query strings
   function readDebuggingVars() {
+
+    // Get query string vars
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     for(var i = 0; i < hashes.length; i++){
@@ -6478,10 +6479,17 @@ var Main = (function($) {
       vars.push(hash[0]);
       vars[hash[0]] = hash[1];
     }
+
+    // See if any of the debugging options are present in query string vars
     if ( typeof vars.enableAxis !== 'undefined' ) { enableAxis = vars.enableAxis; }
     if ( typeof vars.enableKeyPositioning !== 'undefined' ) { enableKeyPositioning = vars.enableKeyPositioning; }
     if ( typeof vars.displayOrientation !== 'undefined' ) { displayOrientation = vars.displayOrientation; }
-    console.log(displayOrientation);
+    if ( typeof vars.forceAssetReload !== 'undefined' ) {
+      forceAssetReload = vars.forceAssetReload;
+      if (forceAssetReload) {
+        assetHash = '?force_reload_'+(new Date().getTime());
+      }
+    }
   }
 
   function init3D() {
@@ -6526,7 +6534,7 @@ var Main = (function($) {
     // Make Skybox for Reflective Materials
     skybox = new THREE.CubeTextureLoader()
       .setPath('assets/skybox/')
-      .load( [ 'x-pos.png','x-neg.png','y-pos.png','y-neg.png','z-pos.png','z-neg.png' ], function() {
+      .load( [ 'x-pos.png'+assetHash,'x-neg.png'+assetHash,'y-pos.png'+assetHash,'y-neg.png'+assetHash,'z-pos.png'+assetHash,'z-neg.png'+assetHash ], function() {
 
         // On complete
         sykboxLoaded = true;
@@ -6536,13 +6544,15 @@ var Main = (function($) {
 
   function loadIcosphere() {
     // Path of collada (dae) model file
-    daeLocation = 'assets/models/icosphere.dae';
+    daeLocation = 'assets/models/icosphere.dae'+assetHash;
+    console.log(daeLocation);
 
     // Load Collada
     var loader = new THREE.ColladaLoader();
     loader.load(daeLocation, function(collada) {
       // Once that model is loaded...
 
+      // Wireframe material
       icosphereMaterial = new THREE.MeshBasicMaterial({
         color: 0x0c0061,
         wireframe: true
@@ -6554,12 +6564,12 @@ var Main = (function($) {
       // Traverse each child of scene
       icosphere.traverse ( function (child) {
 
-        // Set every child mesh to have reflective material
+        // Set every child mesh to have wireframe material
         if (child instanceof THREE.Mesh) {
           child.material = icosphereMaterial;
         }
 
-        // Remove light souce in collada scene
+        // Remove light source in collada scene
         if (child instanceof THREE.PointLight) {
           child.remove();
         }
@@ -6575,7 +6585,7 @@ var Main = (function($) {
 
   function loadNine(whichNine) {
     // Path of collada (dae) model file
-    var daeLocation = 'assets/models/nine-'+whichNine+'.dae';
+    var daeLocation = 'assets/models/nine-'+whichNine+'.dae'+assetHash;
 
         // Make into material
     var nineMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff, envMap: skybox } );
@@ -6596,7 +6606,7 @@ var Main = (function($) {
           child.material = nineMaterial;
         }
 
-        // Remove light souce in collada scene
+        // Remove light source in collada scene
         if (child instanceof THREE.PointLight) {
           child.remove();
         }
@@ -6615,7 +6625,7 @@ var Main = (function($) {
 
   function loadLandscape(whichLandscape) {
     // Path of collada (dae) model file
-    var daeLocation = 'assets/models/landscape-'+whichLandscape+'.dae';
+    var daeLocation = 'assets/models/landscape-'+whichLandscape+'.dae'+assetHash;
 
     // Make into material
     var landscapeMaterial = new THREE.MeshLambertMaterial( {color: 0x000aff, side: THREE.DoubleSide} );
@@ -6631,7 +6641,7 @@ var Main = (function($) {
       // Traverse each child of scene
       landscapes[whichLandscape].traverse ( function (child) {
 
-        // Set every child mesh to have reflective material
+        // Set every child mesh to have lambert material
         if (child instanceof THREE.Mesh) {
           child.material = landscapeMaterial;
         }
@@ -6641,7 +6651,7 @@ var Main = (function($) {
       scene.add(landscapes[whichLandscape]);
 
       // Send to the depths
-      landscapes[whichLandscape].position.y = landscapeHiddenHeight;
+      landscapes[whichLandscape].position.y = landscapePositionYHidden;
 
       // Check if all the models have loaded
       checkIfEverythingLoaded();
@@ -6670,28 +6680,34 @@ var Main = (function($) {
     }
   }
 
+  // What to do when all 3d assets are loaded up
   function everythingLoaded() {
     // Add the renderer to the DOM
     document.body.appendChild( renderer.domElement );
 
     // Page handling/switching
-    initPages();
+    initPageNavigation();
 
-    // Throttled mousewatching (and will be accelerometer tracking)
+    // Watch the users sensor (mouse or accelerometer)
     initUserPositioning();
 
     // Make first nine visible
-    setObjectVisiblity(nines[currentNine],true);
+    setObjectVisiblity(nines[currentNineModel],true);
 
     // Begin animation/rendering
-    animate3D();
+    render3D();
 
     // Animation Started
     $('body').addClass('loaded');
   }
 
-  function initPages() {
+  // Handling of navigation between 3 "pages"
+  function initPageNavigation() {
+
+    // Start home (a lot of the corresponding values are hardcoded in index.php anyway)
     gotoPage('home');
+
+    // Nav buttons
     $document.on('click','.goto-page', function (e) {
       e.preventDefault();
       var page = $(this).attr('data-target-page');
@@ -6699,43 +6715,28 @@ var Main = (function($) {
     });
   }
 
+  // Goto a specific page
   function gotoPage(page) {
     currentPage = page;
     $('body').attr('data-current-page',page);
   }
 
+  // Get the position of the users sensor (mouse of phone accelerometer)
   function initUserPositioning() {
 
+    // For throttling
     var lastMove = 0;
     var eventThrottle = 10;
 
-    // Adjust position based on mouse (if present)
-    $(document).on('mousemove', function(e) {
-      e.preventDefault();
-
-      // Throttle (thanks Matt!)
-      var now = Date.now();
-      if (now > lastMove + eventThrottle) {
-        lastMove = now;
-
-        // Get vars
-        var mouseX = e.pageX;
-        var mouseY = e.pageY;
-        var windowWidth = window.innerWidth;
-        var windowHeight = window.innerHeight;
-
-        // Map mouse x position to continuum [-1,1]
-        userX = (mouseX/windowWidth)*2-1;
-        userY = (mouseY/windowHeight)*2-1;
-      }
-    });
-
-    // UI for testing
+    // UI for testing acceleromater
     if(displayOrientation) { $('body').append('<div class="orientation"></div>'); }
 
     console.log(Modernizr);
 
-    // Adjust position based on accelerometer (if present and a touch device)
+    // UserX,Y will be given used to animate and will be read from accelerometers on devices that have those AND have touch screens
+    // Otherwise we use mouse!
+    // Note: Many laptops have acclerometers (hence the necessity of detecting touch)
+    // It's not perfect but its the best I can figure to test...
     if (window.DeviceOrientationEvent && Modernizr.touchevents) {
 
       window.addEventListener("deviceorientation", function (event) {
@@ -6745,111 +6746,153 @@ var Main = (function($) {
         if (now > lastMove + eventThrottle) {
           lastMove = now;
 
-          // Update UI
+          // Update debugging UI
           if(displayOrientation) {
             $('.orientation').empty().append('Gamma: '+event.gamma.toFixed(2)+'<br>userX: '+userX+'<br>Beta: '+event.beta.toFixed(2)+'<br>userY: '+userY+'<br>');
           }
 
-          // Adjust position based on phone's "roll" (gamma)
-          userX = -Math.min(Math.max((event.gamma/90)*4,-0.99),0.99); // gamma: left to right
-          userY = -Math.min(Math.max((event.beta/90),-0.99),0.99)*2; // beta: up and down
-
+          // Adjust position based on phone's angles
+          userX = -Math.min(Math.max((event.gamma/90)*4,-1),1); // gamma: left to right  (negative to invert, multipliers and cutoffs are fine tunings to the mapping based on testing)
+          userY = -Math.min(Math.max((event.beta/90),-1),1)*2; // beta: up and down
         }
       }, false);
     } else {
+
+      // Update the debugging UI
       if (displayOrientation) {
         $('.orientation').empty().append((window.DeviceOrientationEvent ? 'Orientation Supported<br>': 'No Orientation Event<br>')+(Modernizr.touchevents ? 'Touch': 'No Touch'));
       }
+
+      // Adjust position based on mouse (if present)
+      $(document).on('mousemove', function(e) {
+        e.preventDefault();
+
+        // Throttle (thanks Matt!)
+        var now = Date.now();
+        if (now > lastMove + eventThrottle) {
+          lastMove = now;
+
+          // Get vars
+          var mouseX = e.pageX;
+          var mouseY = e.pageY;
+          var windowWidth = window.innerWidth;
+          var windowHeight = window.innerHeight;
+
+          // Map mouse x position to continuum [-1,1]
+          userX = (mouseX/windowWidth)*2-1;
+          userY = (mouseY/windowHeight)*2-1;
+        }
+      });
     }
   }
 
+  // Animate the letters on the homescreen
   function animateLetters() {
     $('.site-header .t').css({'left':(-userX*50+50)+'%'});
     $('.site-header .f').css({'left':(userX*50+50)+'%'});
   }
 
-  function animate3D() {
+  // Render the scene
+  function render3D() {
     renderingStarted = true;
 
     // Do this every time the system is ready to animate
-    requestAnimationFrame( animate3D );
+    requestAnimationFrame( render3D );
 
     // Sphere is always rotating
     icosphere.rotation.z += 0.001;
 
     // Did we just change pages?
     var justChangedPage = lastPage !== currentPage;
-    var previousNine = currentNine;
+
+    // We'll want to know if our calculations change the nine model, so store it
+    var previousNineModel = currentNineModel;
 
     // First, choose desired values based on which page
 
     // Home scene
     if(currentPage==='home'){
 
-      // Camera moves fast (right with sensor)
-      cameraSpeed = 2;
+      // Set desired paremeters that will be static on this page at moment of page change
+      if(currentPage !== lastPage) {
 
-      // Determine which nine to display based on which 9th of normalized position we are in
-      currentNine = Math.floor(((userX+0.70)/1.4)*9);
-      if (currentNine < 0) { currentNine = 0; }
-      if (currentNine > 8) { currentNine = 8; }
-      // currentNine = 8;
+        // Nine Rotation
+        nineRotationDesired = [0+d2r(-90),0,0]; // For some reason needs a 90 deg correction in x axis, been meaning to solve that mystery, think it has to do with collada import
 
-      // Camera follows sensor
+        // Camera
+        cameraFovDesired = 72.2;
+        cameraAimYDesired = 0;
+        cameraSpeed = 2; // Camera moves fast w/ userX,Y
+
+        // Landscape Y Pos
+        landscape0PositionYDesired = landscapePositionYHidden;
+        landscape1PositionYDesired = landscapePositionYHidden;
+      }
+
+      // Nine model (dynamic based on userX,Y)
+      currentNineModel = Math.floor(((userX+0.70)/1.4)*9);
+      if (currentNineModel < 0) { currentNineModel = 0; }
+      if (currentNineModel > 8) { currentNineModel = 8; }
+
+      // Camera positioning (dynamic based on userX,Y)
       cameraPositionDesired = [
         Math.pow(userX,3)*2.83+userX*4.08,
         -1.5-(userY*2),
         8
       ];
-
-      // Change FOV
-      cameraFovDesired = 72.2;
-
-      // Position Landscapes
-      landscapes[0].position.y = animateValue(landscapeHiddenHeight, landscapes[0].position.y, landscapeSpeed);
-      landscapes[1].position.y = animateValue(landscapeHiddenHeight, landscapes[1].position.y, landscapeSpeed);
-
-      // Rotate Nine
-      nineRotationDesired = [0,0,0];
-
-      cameraAimYDesired = 0;
     }
 
     // Submit scene
     if(currentPage==='submit'){
 
-      // Set the nine
-      currentNine = 8;
+      // Set desired paremeters that will be static on this page at moment of page change
+      if(currentPage !== lastPage) {
 
-      // Camera moves slow
-      cameraSpeed = 0.5;
+        // Set which nine model
+        currentNineModel = 8;
 
-      // Camera static position
+        // Rotate the nine
+        nineRotationDesired = [d2r(-110),d2r(44),d2r(8)]; // For some reason needs a 90 deg correction in x axis, been meaning to solve that mystery, think it has to do with collada import
+
+        // Camera changes
+        cameraFovDesired = 18;
+        cameraAimYDesired = 1;
+        cameraSpeed = 0.5; // Camera is slow
+
+        // Landscape Y Pos
+        landscape0PositionYDesired = landscapePositionYHidden;
+        landscape1PositionYDesired = -0.4;
+      }
+
+      // Camera positioning (dynamic based on userX,Y)
       cameraPositionDesired = [
         7+userX/2,
         -1.5+userY/2,
         8
       ];
-
-      // Position Landscapes
-      landscapes[0].position.y = animateValue(landscapeHiddenHeight, landscapes[0].position.y, landscapeSpeed);
-      landscapes[1].position.y = animateValue(landscapeHeight, landscapes[1].position.y, landscapeSpeed);
-
-      if(currentPage !== lastPage) {
-        nineRotationDesired = [d2r(-35),d2r(50),d2r(0)]; // -125 50 0
-        cameraFovDesired = 21;
-        cameraAimYDesired = 0.5;
-      }
     }
 
     // Details scene
     if(currentPage==='details'){
 
-      // Set the nine
-      currentNine = 0;
+      // Set desired paremeters that will be static on this page at moment of page change
+      if(currentPage !== lastPage) {
 
-      // Camera moves slow
-      cameraSpeed = 0.5;
+        // Set which nine model
+        currentNineModel = 0;
+
+        // Rotate the nine
+        nineRotationDesired = [d2r(-121),d2r(-26),d2r(-30)]; // For some reason needs a 90 deg correction in x axis, been meaning to solve that mystery, think it has to do with collada import
+
+        // Camera
+        cameraFovDesired = 17;
+        cameraAimYDesired = 0.4;
+        cameraSpeed = 0.5;
+
+        // Landscape Y Pos
+        landscape0PositionYDesired = 0;
+        landscape1PositionYDesired = landscapePositionYHidden;
+      }
 
       // Camera static position
       cameraPositionDesired = [
@@ -6857,25 +6900,20 @@ var Main = (function($) {
         -1.5+userY/2,
         8
       ];
-
-      // Position Landscapes
-      landscapes[0].position.y = animateValue(landscapeHeight, landscapes[0].position.y, landscapeSpeed);
-      landscapes[1].position.y = animateValue(landscapeHiddenHeight, landscapes[1].position.y, landscapeSpeed);
-
-      if(currentPage !== lastPage) {
-        nineRotationDesired = [d2r(-30),d2r(15),d2r(0)]; // -120, 15, 0
-        cameraFovDesired = 21;
-        cameraAimYDesired = 0.4;
-      }
     }
 
-    // Now execute/animate the changes
+    // Hide/show models and place/rotate/aim everything at their desired values or one increment closer to their desired values
 
-    // Change nine model
-    if(currentNine !== previousNine) {
-      setObjectVisiblity(nines[previousNine],false);
-      setObjectVisiblity(nines[currentNine],true);
+    // Change nine model if necessary
+    if(currentNineModel !== previousNineModel) {
+      setObjectVisiblity(nines[previousNineModel],false);
+      setObjectVisiblity(nines[currentNineModel],true);
     }
+
+    // Animate landscape height
+      landscapes[0].position.y = animateValue(landscape0PositionYDesired, landscapes[0].position.y, landscapeSpeed);
+      landscapes[1].position.y = animateValue(landscape1PositionYDesired, landscapes[1].position.y, landscapeSpeed);
+
 
     // Animate camera position to desired values
     camera.position.set(
@@ -6890,25 +6928,18 @@ var Main = (function($) {
       camera.updateProjectionMatrix();
     }
 
-    // Repoint the camera at the nine
+    // Repoint the camera at the nine (or to same X and Z but slightly different prescribed Y coord)
     var cameraAimYCurrent = animateValue(cameraAimYDesired, cameraAimYPrevious, 0.05);
     camera.lookAt(new THREE.Vector3( 0, cameraAimYCurrent , 0));
     cameraAimYPrevious = cameraAimYCurrent;
-    // console.log('('+camera.rotation.x+', '+camera.rotation.y+', '+camera.rotation.z+')');
 
-    // Rotate every nine model
+    // Animate the rotatation every nine model
     for(i=0;i<9;i++) {
       nines[i].rotation.set(
-        animateValue(nineRotationDesired[0]+d2r(-90),nines[i].rotation.x,nineRotationSpeed),
+        animateValue(nineRotationDesired[0],nines[i].rotation.x,nineRotationSpeed),
         animateValue(nineRotationDesired[1],nines[i].rotation.y,nineRotationSpeed),
         animateValue(nineRotationDesired[2],nines[i].rotation.z,nineRotationSpeed)
       );
-    }
-    if(enableKeyPositioning) {
-      console.log('Nine Rot: ('+Math.floor(r2d(nines[0].rotation.x))+', '+Math.floor(r2d(nines[0].rotation.y))+', '+Math.floor(r2d(nines[0].rotation.z))+')');
-      console.log('FOV: '+cameraFovDesired);
-      console.log('Landscape h: '+landscapeHeight);
-      console.log('Camera Aim Y: '+cameraAimYDesired);
     }
 
     // Render
@@ -6921,7 +6952,7 @@ var Main = (function($) {
     lastPage = currentPage;
   }
 
-
+  // Linearly progresses a value to a desired valuse
   function animateValue(desired,current,speed) {
 
     // If we are within speed of desired value, just return desired value
@@ -6975,7 +7006,6 @@ var Main = (function($) {
       renderer.setSize( window.innerWidth, window.innerHeight);
     }
   }
-
 
   // Public functions
   return {
