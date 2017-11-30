@@ -62,12 +62,7 @@
       position: absolute;
       margin-bottom: 30px;
       left: calc( (100% - 560px) / 2);
-    }
-
-    @include min-screen-height(700px) {
-      padding-top: 35vh;
-
-      .content {
+      @include min-screen-height(700px) {
         top: auto;
         left: auto;
         position: relative;
@@ -82,9 +77,19 @@
     .back-button {
       float: right;
     }
+
+    @include min-screen-height(700px) {
+      padding-top: 35vh;
+    }
   }
 }
 
 #submit {
   padding-top: 12.5vh;
+
+  @include media-md {
+    @include min-screen-height(700px) {
+      padding-top: 35vh;
+    }
+  }
 }

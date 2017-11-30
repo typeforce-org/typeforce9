@@ -851,9 +851,6 @@ button::after {
   }
 }
 @media screen and (min-width: 750px) and (min-height: 700px) {
-  #details, #submit {
-    padding-top: 35vh;
-  }
   #details .content, #submit .content {
     top: auto;
     left: auto;
@@ -869,7 +866,17 @@ button::after {
     float: right;
   }
 }
+@media screen and (min-width: 750px) and (min-height: 700px) {
+  #details {
+    padding-top: 35vh;
+  }
+}
 
 #submit {
   padding-top: 12.5vh;
+}
+@media screen and (min-width: 750px) and (min-height: 700px) {
+  #submit {
+    padding-top: 35vh;
+  }
 }
