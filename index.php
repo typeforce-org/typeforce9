@@ -18,7 +18,7 @@
     <link rel="shortcut icon" type="image/ico" href="assets/images/favicon.png">
   </head>
   <body data-current-page="home">
-    <div class="load-mask"><img id="preloadergif" src="/assets/images/preloader.gif" /></div>
+    <div class="load-mask"><img id="preloadergif" src="assets/images/preloader.gif" /></div>
     <header id="home" class="site-header page">
       <h1 class="title">
         <span class="t">T</span>

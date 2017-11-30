@@ -388,10 +388,13 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+html, body {
+  overflow: hidden !important;
+}
+
 body {
   font-size: 16px;
   font-size: 100%;
-  overflow: hidden;
   font-family: "Space Mono", monospace;
   font-weight: normal;
   font-style: normal;
@@ -400,9 +403,6 @@ body {
   line-height: 1.25;
   text-transform: none;
   color: #F0F0F0;
-}
-
-body {
   min-width: 320px;
   min-height: 480px;
 }

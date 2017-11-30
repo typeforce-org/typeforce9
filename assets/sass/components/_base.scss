@@ -8,15 +8,15 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-body {
-	font-size: 16px; //Em base unit
-	font-size: 100%;
-  overflow: hidden;
-  @include font-paragraph;
-  color: $white;
+html, body {
+  overflow: hidden !important;
 }
 
 body {
+	font-size: 16px; //Em base unit
+	font-size: 100%;
+  @include font-paragraph;
+  color: $white;
   min-width: 320px;
   min-height: 480px;
 }
