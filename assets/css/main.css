@@ -776,101 +776,73 @@ button::after {
   height: 100%;
   position: fixed;
 }
-.page .content {
+
+#details, #submit {
+  padding-bottom: 130px;
+}
+#details .content, #submit .content {
   width: 240px;
   height: 100%;
   margin: 0 auto;
   *zoom: 1;
   position: relative;
 }
-.page .content:before, .page .content:after {
+#details .content:before, #details .content:after, #submit .content:before, #submit .content:after {
   content: "\0020";
   display: block;
   height: 0;
   overflow: hidden;
 }
-.page .content:after {
+#details .content:after, #submit .content:after {
   clear: both;
 }
 @media screen and (min-width: 750px) {
-  .page .content {
+  #details .content, #submit .content {
     width: 560px;
   }
-  .page .content .indented {
+  #details .content .indented, #submit .content .indented {
     padding-left: 100px;
   }
-  .page .content .col-wrap {
+  #details .content .col-wrap, #submit .content .col-wrap {
     *zoom: 1;
   }
-  .page .content .col-wrap:before, .page .content .col-wrap:after {
+  #details .content .col-wrap:before, #details .content .col-wrap:after, #submit .content .col-wrap:before, #submit .content .col-wrap:after {
     content: "\0020";
     display: block;
     height: 0;
     overflow: hidden;
   }
-  .page .content .col-wrap:after {
+  #details .content .col-wrap:after, #submit .content .col-wrap:after {
     clear: both;
   }
-  .page .content .col {
+  #details .content .col, #submit .content .col {
     float: left;
   }
-  .page .content .col:first-of-type {
+  #details .content .col:first-of-type, #submit .content .col:first-of-type {
     width: 200px;
   }
-  .page .content .col:nth-of-type(2) {
+  #details .content .col:nth-of-type(2), #submit .content .col:nth-of-type(2) {
     width: calc(100% - 200px);
   }
 }
-
-#details {
-  padding-top: 23vh;
-}
-@media screen and (min-width: 750px) {
-  #details {
-    padding: 0;
-  }
-  #details .content {
-    bottom: 0;
-    height: auto;
-    position: absolute;
-    margin-bottom: 30px;
-    left: calc( (100% - 560px) / 2);
-  }
-}
-@media screen and (min-width: 750px) and (min-height: 650px) {
-  #details {
-    padding-top: 34vh;
-  }
-  #details .content {
-    top: auto;
-    left: auto;
-    position: relative;
-  }
-}
-
-#details .back-button {
-  width: 240px;
-  bottom: 40px;
+#details .back-button, #submit .back-button {
+  width: 220px;
   position: absolute;
+  top: calc(100% + 40px);
 }
 @media screen and (min-width: 750px) {
-  #details .back-button {
-    position: relative;
-    bottom: auto;
+  #details .back-button, #submit .back-button {
+    top: auto;
     width: 230px;
-    float: right;
+    margin-top: 30px;
+    position: relative;
   }
 }
-
-#submit {
-  padding-top: 12.5vh;
-  padding-bottom: 130px;
-}
 @media screen and (min-width: 750px) {
-  #submit {
+  #details, #submit {
     padding: 0;
   }
-  #submit .content {
+  #details .content, #submit .content {
     bottom: 0;
     height: auto;
     position: absolute;
@@ -879,26 +851,25 @@ button::after {
   }
 }
 @media screen and (min-width: 750px) and (min-height: 700px) {
-  #submit {
-    padding-top: 37vh;
+  #details, #submit {
+    padding-top: 35vh;
   }
-  #submit .content {
+  #details .content, #submit .content {
     top: auto;
     left: auto;
     position: relative;
   }
 }
 
-#submit .back-button {
-  width: 220px;
-  position: absolute;
-  top: calc(100% + 40px);
+#details {
+  padding-top: 23vh;
 }
 @media screen and (min-width: 750px) {
-  #submit .back-button {
-    top: auto;
-    width: 230px;
-    margin-top: 30px;
-    position: relative;
+  #details .back-button {
+    float: right;
   }
+}
+
+#submit {
+  padding-top: 12.5vh;
 }

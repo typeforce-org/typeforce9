@@ -35,15 +35,17 @@
     <main>
       <section id="details" class="page page-wrap">
         <div class="content">
-          <h2><span class="tf9">TF-9</span> Details</h2>
-          <div class="indented">
-            <h3>Where</h3>
-            <p><a href="https://goo.gl/maps/2pKAAsGnSpD2" target="_blank">3219-21 S Morgan St<br>
-            Chicago, IL 60607</a></p>
-            <h3>When</h3>
-            <p>02/24 - 03/10</p>
-            <h3>Opening Night</h3>
-            <p>02/24</p>
+          <div class="scrollbox col-wrap">
+            <h2><span class="tf9">TF-9</span> Details</h2>
+            <div class="indented">
+              <h3>Where</h3>
+              <p><a href="https://goo.gl/maps/2pKAAsGnSpD2" target="_blank">3219-21 S Morgan St<br>
+              Chicago, IL 60607</a></p>
+              <h3>When</h3>
+              <p>02/24 - 03/10</p>
+              <h3>Opening Night</h3>
+              <p>02/24</p>
+            </div>
           </div>
           <button class="goto-page back-button" data-target-page="home">Go Back &gt;</button>
         </div>
