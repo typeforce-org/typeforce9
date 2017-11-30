@@ -757,13 +757,13 @@ button::after {
   }
   .site-nav .menu-item.details {
     left: 0;
-    -webkit-transform: rotate(90deg);
-            transform: rotate(90deg);
+    -webkit-transform: translateY(-50%) rotate(90deg);
+            transform: translateY(-50%) rotate(90deg);
   }
   .site-nav .menu-item.submit {
     right: 0;
-    -webkit-transform: rotate(270deg);
-            transform: rotate(270deg);
+    -webkit-transform: translateY(-50%) rotate(270deg);
+            transform: translateY(-50%) rotate(270deg);
   }
 }
 
