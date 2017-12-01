@@ -429,7 +429,7 @@ h2 {
   line-height: 1.25;
   text-transform: none;
 }
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 650px) {
   h2 {
     font-family: "Space Mono", monospace;
     font-weight: normal;
@@ -462,7 +462,7 @@ h3 {
   margin-bottom: 0;
   margin-top: 20px;
 }
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 650px) {
   h3 {
     margin-top: 30px;
   }
@@ -474,7 +474,7 @@ h3 + p {
 p {
   margin: 20px 0;
 }
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 650px) {
   p {
     margin: 30px 0;
   }
@@ -617,7 +617,7 @@ button::after {
           transform: skewX(-45deg);
 }
 
-@media screen and (max-width: 749px) {
+@media screen and (max-width: 649px) {
   .scrollbox {
     width: 100%;
     height: 100%;
@@ -659,7 +659,7 @@ button::after {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
 }
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 650px) {
   .site-header .title {
     width: 500px;
   }
@@ -702,7 +702,7 @@ button::after {
   line-height: 1.42857;
   text-transform: uppercase;
 }
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 650px) {
   .site-nav {
     font-family: "Space Mono", monospace;
     font-weight: normal;
@@ -731,7 +731,7 @@ button::after {
 .site-nav .menu-item-list:after {
   clear: both;
 }
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 650px) {
   .site-nav .menu-item-list {
     top: 0;
     left: 50%;
@@ -758,7 +758,7 @@ button::after {
 .site-nav .menu-item a:hover {
   color: #000AFF;
 }
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 650px) {
   .site-nav .menu-item {
     width: auto;
     position: absolute;
@@ -785,6 +785,7 @@ button::after {
   width: 100%;
   height: 100%;
   position: fixed;
+  overflow: hidden;
 }
 
 #details, #submit {
@@ -806,7 +807,7 @@ button::after {
 #details .content:after, #submit .content:after {
   clear: both;
 }
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 650px) {
   #details .content, #submit .content {
     width: 560px;
   }
@@ -840,7 +841,7 @@ button::after {
   position: absolute;
   top: calc(100% + 40px);
 }
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 650px) {
   #details .back-button, #submit .back-button {
     top: auto;
     width: 230px;
@@ -848,7 +849,7 @@ button::after {
     position: relative;
   }
 }
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 650px) {
   #details, #submit {
     padding: 0;
   }
@@ -860,7 +861,7 @@ button::after {
     left: calc( (100% - 560px) / 2);
   }
 }
-@media screen and (min-width: 750px) and (min-height: 700px) {
+@media screen and (min-width: 650px) and (min-height: 700px) {
   #details .content, #submit .content {
     top: auto;
     left: auto;
@@ -871,12 +872,12 @@ button::after {
 #details {
   padding-top: 23vh;
 }
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 650px) {
   #details .back-button {
     float: right;
   }
 }
-@media screen and (min-width: 750px) and (min-height: 700px) {
+@media screen and (min-width: 650px) and (min-height: 700px) {
   #details {
     padding-top: 35vh;
   }
@@ -885,7 +886,7 @@ button::after {
 #submit {
   padding-top: 12.5vh;
 }
-@media screen and (min-width: 750px) and (min-height: 700px) {
+@media screen and (min-width: 650px) and (min-height: 700px) {
   #submit {
     padding-top: 35vh;
   }
