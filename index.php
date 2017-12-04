@@ -9,6 +9,7 @@
     $author = 'Firebelly Design';
     $email = 'submit@typeforce.com';
     $ga_tracking = 'UA-998109-32';
+    $twitter_handle = '@firebellydesign';
   ?>
 <!--[if IE 8]> <html lang="en" class="no-js ie8 lt-ie9 lt-ie10"> <![endif]-->
 <!--[if IE 9 ]> <html lang="en" class="no-js ie9 lt-ie10"> <![endif]-->
@@ -26,7 +27,6 @@
     <meta name="author" content="<?= $author ?>">
     <!-- facebook/og -->
     <meta property="og:title" content="<?= $title ?>">
-    <meta property="og:site_name" content="<?= $title ?>">
     <meta property="og:type" content="website">
     <meta property="og:description" content="<?= $description ?>">
     <meta property="og:image" content="<?= $image ?>">
@@ -34,9 +34,12 @@
     <meta property="og:image:height" content="<?= $imageH ?>">
     <meta property="og:url" content="<?= $url ?>">
     <meta property="og:site_name" content="<?= $title ?>">
+    <meta property="og:locale" content="en_us">
     <!-- twitter -->
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<?= $title ?>">
+    <meta name="twitter:creator" content="<?= $twitter_handle ?>">
+    <meta name="twitter:site" content="<?= $twitter_handle ?>">
     <meta name="twitter:description" content="<?= $description ?>">
     <meta name="twitter:image" content="<?= $image ?>">
     <meta name="twitter:url" content="<?= $url ?>">
