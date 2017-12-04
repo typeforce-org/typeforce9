@@ -1,4 +1,15 @@
 <!doctype html>
+  <?php 
+    $title = 'Typeforce 9';
+    $description = 'Typeforce 9 is now open for submissions. Submissions due Jan 12.';
+    $image = 'http://typeforce.com/9/assets/images/social-media-sharing.jpg';
+    $imageW = 1600;
+    $imageH = 800;
+    $url = 'http://typeforce.com/9/';
+    $author = 'Firebelly Design';
+    $email = 'submit@typeforce.com';
+    $ga_tracking = 'UA-998109-32';
+  ?>
 <!--[if IE 8]> <html lang="en" class="no-js ie8 lt-ie9 lt-ie10"> <![endif]-->
 <!--[if IE 9 ]> <html lang="en" class="no-js ie9 lt-ie10"> <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
@@ -7,12 +18,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <title>Typeforce 9</title>
-    <link rel="canonical" href="">
-    <meta name="description" content="">
-    <meta property="og:title" content="Typeforce 9" />
-    <meta property="og:image" content="http://typeforce.com/9/assets/images/social-media-sharing.jpg" />
-    <meta property="og:url" content="http://typeforce.com/9/" />
-    <meta property="og:description" content="Typeforce 9 is now open for submissions. Submissions due Jan 12." />
+    <!-- BEGIN meta -->
+    <meta itemprop="name" content="<?= $title ?>">
+    <meta itemprop="image" content="<?= $image ?>">
+    <meta itemprop="description" content="<?= $description ?>">
+    <meta name="description" content="<?= $description ?>">
+    <meta name="author" content="<?= $author ?>">
+    <!-- facebook/og -->
+    <meta property="og:title" content="<?= $title ?>">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="<?= $description ?>">
+    <meta property="og:image" content="<?= $image ?>">
+    <meta property="og:image:width" content="<?= $imageW ?>">
+    <meta property="og:image:height" content="<?= $imageH ?>">
+    <meta property="og:url" content="<?= $url ?>">
+    <meta property="og:site_name" content="<?= $title ?>">
+    <!-- twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="<?= $title ?>">
+    <meta name="twitter:description" content="<?= $description ?>">
+    <meta name="twitter:image" content="<?= $image ?>">
+    <meta name="twitter:url" content="<?= $url ?>">
+    <!-- END meta -->
     <link rel="stylesheet" href="assets/css/main.min.css?force-reload<?= time(); ?>">
     <link type="text/plain" rel="author" href="humans.txt">
     <link rel="shortcut icon" type="image/ico" href="assets/images/favicon.png">
@@ -82,7 +109,7 @@
     <script src="assets/js/build/site.js?force-reload<?= time(); ?>"></script>
     <script type="text/javascript">// Google Analytics
       var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-XXXXX-X']); // Replace "XXXXX-X" with your account code
+      _gaq.push(['_setAccount', '<?= $ga_tracking ?>']); 
       _gaq.push(['_trackPageview']);
       (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
