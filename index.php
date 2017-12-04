@@ -3,8 +3,8 @@
     $title = 'Typeforce 9';
     $description = 'Typeforce 9 is now open for submissions. Submissions due Jan 12.';
     $image = 'http://typeforce.com/9/assets/images/social-media-sharing.jpg';
-    $imageW = 1600;
-    $imageH = 800;
+    $imageW = 1300;
+    $imageH = 650;
     $url = 'http://typeforce.com/9/';
     $author = 'Firebelly Design';
     $email = 'submit@typeforce.com';
