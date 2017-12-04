@@ -790,6 +790,7 @@ button::after {
 }
 
 #details, #submit {
+  padding-top: 12.5vh;
   padding-bottom: 130px;
 }
 #details .content, #submit .content {
@@ -870,9 +871,6 @@ button::after {
   }
 }
 
-#details {
-  padding-top: 23vh;
-}
 @media screen and (min-width: 650px) {
   #details .back-button {
     float: right;
@@ -884,9 +882,6 @@ button::after {
   }
 }
 
-#submit {
-  padding-top: 12.5vh;
-}
 @media screen and (min-width: 650px) and (min-height: 700px) {
   #submit {
     padding-top: 35vh;
