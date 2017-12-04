@@ -9,10 +9,10 @@
     <title>Typeforce 9</title>
     <link rel="canonical" href="">
     <meta name="description" content="">
-    <meta property="og:title" content="" />
-    <meta property="og:image" content="" />
-    <meta property="og:url" content="" />
-    <meta property="og:description" content="" />
+    <meta property="og:title" content="Typeforce 9" />
+    <meta property="og:image" content="assets/images/social-media-sharing.jpg" />
+    <meta property="og:url" content="http://typeforce.com/9/" />
+    <meta property="og:description" content="Typeforce 9 is now open for submissions. Submissions due Jan 12." />
     <link rel="stylesheet" href="assets/css/main.min.css?force-reload<?= time(); ?>">
     <link type="text/plain" rel="author" href="humans.txt">
     <link rel="shortcut icon" type="image/ico" href="assets/images/favicon.png">
@@ -42,12 +42,13 @@
             <h2><span class="tf9">TF-9</span> Details</h2>
             <div class="indented">
               <h3>Where</h3>
-              <p><a href="https://goo.gl/maps/2pKAAsGnSpD2" target="_blank">3219-21 S Morgan St<br>
-              Chicago, IL 60607</a></p>
+              <p><a href="https://goo.gl/maps/2pKAAsGnSpD2" target="_blank">Co-Prosperity Sphere<br>
+                3219-21 S Morgan St<br>
+                Chicago, IL 60607</a></p>
               <h3>When</h3>
-              <p>02/24 - 03/10</p>
+              <p>02/23 - 03/10</p>
               <h3>Opening Night</h3>
-              <p>02/24</p>
+              <p>02/23</p>
             </div>
           </div>
           <button class="goto-page back-button" data-target-page="home">Go Back &gt;</button>
@@ -59,7 +60,7 @@
             <h2><span class="tf9">TF-9</span> Submit</h2>
             <div class="col">
               <h3>Deadline</h3>
-              <p>1/9/18</p>
+              <p>1/12/18</p>
             </div>
             <div class="col">
               <h3>Send to</h3>
