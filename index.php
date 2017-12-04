@@ -10,7 +10,7 @@
     <link rel="canonical" href="">
     <meta name="description" content="">
     <meta property="og:title" content="Typeforce 9" />
-    <meta property="og:image" content="assets/images/social-media-sharing.jpg" />
+    <meta property="og:image" content="http://typeforce.com/9/assets/images/social-media-sharing.jpg" />
     <meta property="og:url" content="http://typeforce.com/9/" />
     <meta property="og:description" content="Typeforce 9 is now open for submissions. Submissions due Jan 12." />
     <link rel="stylesheet" href="assets/css/main.min.css?force-reload<?= time(); ?>">
