@@ -43,7 +43,7 @@
             <div class="indented">
               <h3>Where</h3>
               <p><a href="https://goo.gl/maps/2pKAAsGnSpD2" target="_blank">Co-Prosperity Sphere<br>
-                3219-21 S Morgan St<br>
+                3219 S Morgan St<br>
                 Chicago, IL 60607</a></p>
               <h3>When</h3>
               <p>02/23 - 03/10</p>
