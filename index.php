@@ -1,16 +1,17 @@
+<?php 
+  $title = 'Typeforce 9';
+  $description = 'Typeforce 9 is now open for submissions. Submissions due Jan 12.';
+  $image = 'http://typeforce.com/9/assets/images/social-media-sharing.jpg';
+  $imageW = 1300;
+  $imageH = 650;
+  $url = 'http://typeforce.com/9/';
+  $author = 'Firebelly Design';
+  $email = 'submit@typeforce.com';
+  $ga_tracking = 'UA-998109-32';
+  $twitter_handle = '@firebellydesign';
+?>
+
 <!doctype html>
-  <?php 
-    $title = 'Typeforce 9';
-    $description = 'Typeforce 9 is now open for submissions. Submissions due Jan 12.';
-    $image = 'http://typeforce.com/9/assets/images/social-media-sharing.jpg';
-    $imageW = 1300;
-    $imageH = 650;
-    $url = 'http://typeforce.com/9/';
-    $author = 'Firebelly Design';
-    $email = 'submit@typeforce.com';
-    $ga_tracking = 'UA-998109-32';
-    $twitter_handle = '@firebellydesign';
-  ?>
 <!--[if IE 8]> <html lang="en" class="no-js ie8 lt-ie9 lt-ie10"> <![endif]-->
 <!--[if IE 9 ]> <html lang="en" class="no-js ie9 lt-ie10"> <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
@@ -18,7 +19,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <title>Typeforce 9</title>
+    <title><?= $title ?></title>
     <!-- BEGIN meta -->
     <meta itemprop="name" content="<?= $title ?>">
     <meta itemprop="image" content="<?= $image ?>">
