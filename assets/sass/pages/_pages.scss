@@ -11,7 +11,7 @@
   overflow: hidden;
 }
 
-#details, #submit {
+#details, #submit, #artists {
   padding-top: 12.5vh;
   padding-bottom: 130px;
 
@@ -85,10 +85,33 @@
   }
 }
 
-#submit {
+#submit, #artists {
   @include media-md {
     @include min-screen-height(700px) {
       padding-top: 35vh;
+    }
+  }
+}
+
+#artists {
+  .artist-list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+
+  .content {
+
+    @include media-md {
+      width: 600px;
+      .col {
+
+        float: left;
+        margin-left: 100px;
+        &:first-of-type, &:nth-of-type(2) {
+          width: 200px;
+        }
+      }
     }
   }
 }

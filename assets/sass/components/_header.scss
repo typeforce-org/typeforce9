@@ -95,7 +95,7 @@
         transform: translateY(-50%) rotate(90deg);
       }
 
-      &.submit {
+      &.submit, &.artists {
         right: 0;
         transform: translateY(-50%) rotate(270deg);
       }

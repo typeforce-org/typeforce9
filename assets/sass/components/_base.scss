@@ -124,7 +124,7 @@ body {
     transform: translateX(-10%);
   }
 
-  #submit {
+  #submit, #artists {
     transform: translateX(10%);
   }
 
@@ -145,6 +145,14 @@ body {
 
   &[data-current-page="submit"] {
     #submit {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+  }
+
+  &[data-current-page="artists"] {
+    #artists {
       opacity: 1;
       transform: none;
       pointer-events: auto;

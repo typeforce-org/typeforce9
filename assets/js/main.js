@@ -533,8 +533,8 @@ var Main = (function($) {
       ];
     }
 
-    // Submit scene
-    if(currentPage==='submit'){
+    // Submit/Artists scene
+    if(currentPage==='submit' || currentPage==='artists'){
 
       // Set desired paremeters that will be static on this page at moment of page change
       if(currentPage !== lastPage) {
