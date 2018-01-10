@@ -1,6 +1,6 @@
 <?php 
   $title = 'Typeforce 9';
-  $description = 'Typeforce 9 is now open for submissions. Submissions due Jan 12.';
+  $description = 'Announcing Typeforce 9 artists. Opening night Feb 23.';
   $image = 'http://typeforce.com/9/assets/images/social-media-sharing.jpg';
   $imageW = 1300;
   $imageH = 650;
