@@ -106,11 +106,10 @@
                 <li class="artist-list-item">Jesse Hora</li>
                 <li class="artist-list-item">John Pobojewski</li>
                 <li class="artist-list-item">Jordan Whitney Martin</li>
-                <li class="artist-list-item">Josh Epstein</li>
                 <li class="artist-list-item">Kaleb Dean</li>
+                <li class="artist-list-item">Kevin Winkler</li>
               </div>
               <div class="col">
-                <li class="artist-list-item">Kevin Winkler</li>
                 <li class="artist-list-item">Kristen Myers</li>
                 <li class="artist-list-item">Kyle Green</li>
                 <li class="artist-list-item">Lauren Gallagher</li>
@@ -124,6 +123,7 @@
                 <li class="artist-list-item">Satoru Nihei</li>
                 <li class="artist-list-item">Selina Khounlo</li>
                 <li class="artist-list-item">Taek Hyun Kim</li>
+                <li class="artist-list-item">TotesFerosh</li>
                 <li class="artist-list-item">Wendy Robles</li>
                 <li class="artist-list-item">Zach Minnich</li>
               </div>
