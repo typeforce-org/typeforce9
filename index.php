@@ -1,6 +1,6 @@
-<?php 
+<?php
   $title = 'Typeforce 9';
-  $description = 'Typeforce 9 is now open for submissions. Submissions due Jan 12.';
+  $description = 'Announcing Typeforce 9 artists. Opening night Feb 23.';
   $image = 'http://typeforce.com/9/assets/images/social-media-sharing.jpg';
   $imageW = 1300;
   $imageH = 650;
@@ -63,7 +63,7 @@
       <nav class="site-nav">
         <ul class="menu-item-list">
           <li class="menu-item details"><a href="#details" class="goto-page" data-target-page="details">Details</a></li>
-          <li class="menu-item submit"><a href="#submit" class="goto-page" data-target-page="submit">Submit</a></li>
+          <li class="menu-item artists"><a href="#artists" class="goto-page" data-target-page="artists">Artists</a></li>
         </ul>
       </nav>
     </header>
@@ -86,35 +86,57 @@
           <button class="goto-page back-button" data-target-page="home">Go Back &gt;</button>
         </div>
       </section>
-      <section id="submit" class="page page-wrap">
+      <section id="artists" class="page page-wrap">
         <div class="content">
           <div class="scrollbox col-wrap">
-            <h2><span class="tf9">TF-9</span> Submit</h2>
-            <div class="col">
-              <h3>Deadline</h3>
-              <p>1/12/18</p>
-            </div>
-            <div class="col">
-              <h3>Send to</h3>
-              <a href="mailto:submit@typeforce.com" class="email" target="_blank"><span class="wrap-break">submit</span><span class="wrap-break">@typeforce.com</span></a>
-              <p>Include a PDF file with description of work, approximate size, images of work or previous work if not yet completed. Ideally, we would like a series of pieces or enough work to take up a 10'×10' wall.</p>
-            </div>
+            <h2><span class="tf9">TF-9</span> Artists</h2>
+            <ul class="artist-list">
+              <div class="col">
+                <li class="artist-list-item">Abby Wynne</li>
+                <li class="artist-list-item">Anna Mort</li>
+                <li class="artist-list-item">Andrew Reaume</li>
+                <li class="artist-list-item">Brian Lange</li>
+                <li class="artist-list-item">Bud Rodecker</li>
+                <li class="artist-list-item">Christina Zouras</li>
+                <li class="artist-list-item">Don Zegler</li>
+                <li class="artist-list-item">Dud Lawson</li>
+                <li class="artist-list-item">Jacqueline Frole</li>
+                <li class="artist-list-item">Jen Farrell</li>
+                <li class="artist-list-item">Jeremiah Chiu</li>
+                <li class="artist-list-item">Jesse Hora</li>
+                <li class="artist-list-item">John Pobojewski</li>
+                <li class="artist-list-item">Jordan Whitney Martin</li>
+                <li class="artist-list-item">Josh Epstein</li>
+                <li class="artist-list-item">Kaleb Dean</li>
+              </div>
+              <div class="col">
+                <li class="artist-list-item">Kevin Winkler</li>
+                <li class="artist-list-item">Kristen Myers</li>
+                <li class="artist-list-item">Kyle Green</li>
+                <li class="artist-list-item">Lauren Gallagher</li>
+                <li class="artist-list-item">Leah Wendzinski</li>
+                <li class="artist-list-item">Linda Elshami</li>
+                <li class="artist-list-item">Megan Pryce</li>
+                <li class="artist-list-item">Polina Osherov</li>
+                <li class="artist-list-item">Rick Valicenti</li>
+                <li class="artist-list-item">Robert Soltys</li>
+                <li class="artist-list-item">Rubani Shaw</li>
+                <li class="artist-list-item">Satoru Nihei</li>
+                <li class="artist-list-item">Selina Khounlo</li>
+                <li class="artist-list-item">Taek Hyun Kim</li>
+                <li class="artist-list-item">Wendy Robles</li>
+                <li class="artist-list-item">Zach Minnich</li>
+              </div>
+            </ul>
           </div>
           <button class="goto-page back-button" data-target-page="home">&lt; Go Back</button>
         </div>
       </section>
     </main>
-    <script type="text/javascript">
-      // var preloaderImage = new Image();
-      // preloaderImage.src = '/assets/images/preloader.gif';
-      // preloaderImage.onload = function() {
-      //   document.getElementById('preloadergif').src = preloaderImage.src;
-      // }​
-    </script>
     <script src="assets/js/build/site.js?v24_4_17"></script>
     <script type="text/javascript">// Google Analytics
       var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '<?= $ga_tracking ?>']); 
+      _gaq.push(['_setAccount', '<?= $ga_tracking ?>']);
       _gaq.push(['_trackPageview']);
       (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

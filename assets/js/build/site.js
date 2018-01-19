@@ -6662,7 +6662,7 @@ var Main = (function($) {
   function checkIfEverythingLoaded() {
 
     loadingProgress += 1/13;
-    $('#loading-progress-bar').attr('style','width: '+(Math.min(loadingProgress*200,200))+'px;')
+    $('#loading-progress-bar').attr('style','width: '+(Math.min(loadingProgress*200,200))+'px;');
 
 
     // Check to see if each model is loaded (if its associated global var is not empty)
@@ -6848,7 +6848,7 @@ var Main = (function($) {
       ];
     }
 
-    // Submit/Artist scene
+    // Submit/Artists scene
     if(currentPage==='submit' || currentPage==='artists'){
 
       // Set desired paremeters that will be static on this page at moment of page change

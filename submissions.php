@@ -1,6 +1,6 @@
 <?php 
   $title = 'Typeforce 9';
-  $description = 'Announcing Typeforce 9 artists. Opening night Feb 23.';
+  $description = 'Typeforce 9 is now open for submissions. Submissions due Jan 12.';
   $image = 'http://typeforce.com/9/assets/images/social-media-sharing.jpg';
   $imageW = 1300;
   $imageH = 650;
@@ -63,7 +63,7 @@
       <nav class="site-nav">
         <ul class="menu-item-list">
           <li class="menu-item details"><a href="#details" class="goto-page" data-target-page="details">Details</a></li>
-          <li class="menu-item artists"><a href="#artists" class="goto-page" data-target-page="artists">Artists</a></li>
+          <li class="menu-item submit"><a href="#submit" class="goto-page" data-target-page="submit">Submit</a></li>
         </ul>
       </nav>
     </header>
@@ -86,45 +86,31 @@
           <button class="goto-page back-button" data-target-page="home">Go Back &gt;</button>
         </div>
       </section>
-      <section id="artists" class="page page-wrap">
+      <section id="submit" class="page page-wrap">
         <div class="content">
           <div class="scrollbox col-wrap">
-            <h2><span class="tf9">TF-9</span> Artists</h2>
-            <ul class="artist-list">
-              <div class="col">
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Allof These</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Names Arefake</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Loree Leggett</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Somer Tiller</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Akiko Melendez</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Julieta Nugent</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Sabina  Valentine</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Babette Coward</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Thad  Blackmon</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Kimbra  Crespo</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Chery Robins</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Kandace Tomlinson</li>
-              </div>
-              <div class="col">
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Nova  Durr</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Horacio Richie</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Vashti  Singer</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Coleman Corral</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Dionna  Muniz</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Delsie  Mccollum</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Babara  Blount</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Porter  Kruger</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Odessa  Snell</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Tawny Zuniga</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Mariam  Nagel</li>
-                <li class="artist-list-item"><!-- FAKE PLACEHOLDER -->Demetrice Orta</li>
-              </div>
-            </ul>
+            <h2><span class="tf9">TF-9</span> Submit</h2>
+            <div class="col">
+              <h3>Deadline</h3>
+              <p>1/12/18</p>
+            </div>
+            <div class="col">
+              <h3>Send to</h3>
+              <a href="mailto:submit@typeforce.com" class="email" target="_blank"><span class="wrap-break">submit</span><span class="wrap-break">@typeforce.com</span></a>
+              <p>Include a PDF file with description of work, approximate size, images of work or previous work if not yet completed. Ideally, we would like a series of pieces or enough work to take up a 10'×10' wall.</p>
+            </div>
           </div>
           <button class="goto-page back-button" data-target-page="home">&lt; Go Back</button>
         </div>
       </section>
     </main>
+    <script type="text/javascript">
+      // var preloaderImage = new Image();
+      // preloaderImage.src = '/assets/images/preloader.gif';
+      // preloaderImage.onload = function() {
+      //   document.getElementById('preloadergif').src = preloaderImage.src;
+      // }​
+    </script>
     <script src="assets/js/build/site.js?v24_4_17"></script>
     <script type="text/javascript">// Google Analytics
       var _gaq = _gaq || [];

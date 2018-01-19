@@ -117,7 +117,7 @@
 }
 
 @mixin media-md() { // Desktop
-  @media screen and (min-width: $breakpoint-medium) {
+  @media screen and (min-width: $breakpoint-medium) and (min-height: $breakpoint-medium-height) {
     @content;
   }
 }

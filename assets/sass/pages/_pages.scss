@@ -85,10 +85,18 @@
   }
 }
 
-#submit, #artists {
+#submit {
   @include media-md {
     @include min-screen-height(700px) {
       padding-top: 35vh;
+    }
+  }
+}
+
+#artists {
+  @include media-md {
+    @include min-screen-height(700px) {
+      padding-top: 22vh;
     }
   }
 }
