@@ -880,6 +880,11 @@ button::after {
 #submit {
   overflow-y: scroll;
 }
+@media screen and (min-width: 650px) and (min-height: 560px) {
+  #submit {
+    overflow-y: visible;
+  }
+}
 @media screen and (min-width: 650px) and (min-height: 560px) and (min-height: 700px) {
   #submit {
     padding-top: 35vh;
@@ -888,6 +893,11 @@ button::after {
 
 #artists {
   overflow-y: scroll;
+}
+@media screen and (min-width: 650px) and (min-height: 560px) {
+  #artists {
+    overflow-y: visible;
+  }
 }
 @media screen and (min-width: 650px) and (min-height: 560px) and (min-height: 700px) {
   #artists {

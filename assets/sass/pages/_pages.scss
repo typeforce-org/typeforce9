@@ -87,6 +87,7 @@
 
   overflow-y: scroll;
   @include media-md {
+    overflow-y: visible;
     @include min-screen-height(700px) {
       padding-top: 35vh;
     }
@@ -97,6 +98,8 @@
 
   overflow-y: scroll;
   @include media-md {
+
+    overflow-y: visible;
     @include min-screen-height(700px) {
       padding-top: 22vh;
     }
