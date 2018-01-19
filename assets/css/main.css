@@ -624,21 +624,6 @@ button::after {
           transform: skewX(-45deg);
 }
 
-.scrollbox {
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
-  padding-bottom: 0;
-  padding-right: 20px;
-}
-@media screen and (min-width: 650px) and (min-height: 560px) {
-  .scrollbox {
-    width: auto;
-    height: auto;
-    overflow-y: visible;
-    padding: 0;
-  }
-}
 .scrollbox :last-child {
   margin-bottom: 0;
 }
@@ -798,7 +783,6 @@ button::after {
   width: 100%;
   height: 100%;
   position: fixed;
-  overflow: hidden;
 }
 
 #details, #submit, #artists {
@@ -851,15 +835,14 @@ button::after {
   }
 }
 #details .back-button, #submit .back-button, #artists .back-button {
+  margin: 30px 0;
   width: 220px;
-  position: absolute;
-  top: calc(100% + 40px);
 }
 @media screen and (min-width: 650px) and (min-height: 560px) {
   #details .back-button, #submit .back-button, #artists .back-button {
-    top: auto;
     width: 230px;
     margin-top: 30px;
+    margin-bottom: 0;
     position: relative;
   }
 }
@@ -894,12 +877,18 @@ button::after {
   }
 }
 
+#submit {
+  overflow-y: scroll;
+}
 @media screen and (min-width: 650px) and (min-height: 560px) and (min-height: 700px) {
   #submit {
     padding-top: 35vh;
   }
 }
 
+#artists {
+  overflow-y: scroll;
+}
 @media screen and (min-width: 650px) and (min-height: 560px) and (min-height: 700px) {
   #artists {
     padding-top: 22vh;

@@ -8,7 +8,6 @@
   width: 100%;
   height: 100%;
   position: fixed;
-  overflow: hidden;
 }
 
 #details, #submit, #artists {
@@ -43,14 +42,13 @@
   }
 
   .back-button {
+    margin: 30px 0;
     width: 220px;
-    position: absolute;
-    top: calc(100% + 40px);
 
     @include media-md {
-      top: auto;
       width: 230px;
       margin-top: 30px;
+      margin-bottom: 0;
       position: relative;
     }
   }
@@ -86,6 +84,8 @@
 }
 
 #submit {
+
+  overflow-y: scroll;
   @include media-md {
     @include min-screen-height(700px) {
       padding-top: 35vh;
@@ -94,6 +94,8 @@
 }
 
 #artists {
+
+  overflow-y: scroll;
   @include media-md {
     @include min-screen-height(700px) {
       padding-top: 22vh;
