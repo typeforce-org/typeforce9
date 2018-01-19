@@ -45,7 +45,7 @@
     <meta name="twitter:image" content="<?= $image ?>">
     <meta name="twitter:url" content="<?= $url ?>">
     <!-- END meta -->
-    <link rel="stylesheet" href="assets/css/main.min.css?1_9_18_v2">
+    <link rel="stylesheet" href="assets/css/main.min.css?1_9_18_v3">
     <link type="text/plain" rel="author" href="humans.txt">
     <link rel="shortcut icon" type="image/ico" href="assets/images/favicon.png">
   </head>
@@ -133,7 +133,7 @@
         </div>
       </section>
     </main>
-    <script src="assets/js/build/site.js?1_9_18_v2"></script>
+    <script src="assets/js/build/site.js?1_9_18_v3"></script>
     <script type="text/javascript">// Google Analytics
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', '<?= $ga_tracking ?>']);
