@@ -118,7 +118,7 @@
                 <li class="artist-list-item">Megan Pryce</li>
                 <li class="artist-list-item">Polina Osherov</li>
                 <li class="artist-list-item">Rick Valicenti</li>
-                <li class="artist-list-item">Robert Soltys</li>
+                <li class="artist-list-item">Robert Sołtys</li>
                 <li class="artist-list-item">Rubani Shaw</li>
                 <li class="artist-list-item">Satoru Nihei</li>
                 <li class="artist-list-item">Selina Khounlo</li>
