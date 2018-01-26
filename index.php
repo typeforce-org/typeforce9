@@ -45,7 +45,7 @@
     <meta name="twitter:image" content="<?= $image ?>">
     <meta name="twitter:url" content="<?= $url ?>">
     <!-- END meta -->
-    <link rel="stylesheet" href="assets/css/main.min.css?1_9_18_v4">
+    <link rel="stylesheet" href="assets/css/main.min.css?1_26_18v1">
     <link type="text/plain" rel="author" href="humans.txt">
     <link rel="shortcut icon" type="image/ico" href="assets/images/favicon.png">
   </head>
@@ -73,6 +73,7 @@
           <div class="scrollbox col-wrap">
             <h2><span class="tf9">TF-9</span> Details</h2>
             <div class="indented">
+              <p></p>
               <h3>Where</h3>
               <p><a href="https://goo.gl/maps/2pKAAsGnSpD2" target="_blank">Co-Prosperity Sphere<br>
                 3219 S Morgan St<br>
@@ -80,7 +81,9 @@
               <h3>When</h3>
               <p>02/23 - 03/10</p>
               <h3>Opening Night</h3>
-              <p>02/23</p>
+              <p>02/23, 6-11p<!-- <br>
+              <a href="#">RSVP</a> --></p>
+              <h3>Free Admission</h3>
             </div>
           </div>
           <button class="goto-page back-button" data-target-page="home">Go Back &gt;</button>
@@ -133,7 +136,7 @@
         </div>
       </section>
     </main>
-    <script src="assets/js/build/site.js?1_9_18_v4"></script>
+    <script src="assets/js/build/site.js?1_26_18v1"></script>
     <script type="text/javascript">// Google Analytics
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', '<?= $ga_tracking ?>']);

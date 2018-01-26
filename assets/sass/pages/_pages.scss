@@ -72,20 +72,26 @@
 }
 
 #details {
+
+  overflow-y: auto;
+  
   @include media-md {
+    overflow-y: visible;
+
     .back-button {
       float: right;
     }
 
     @include min-screen-height(700px) {
-      padding-top: 35vh;
+      padding-top: 30vh;
     }
   }
 }
 
 #submit {
 
-  overflow-y: scroll;
+  overflow-y: auto;
+  
   @include media-md {
     overflow-y: visible;
     @include min-screen-height(700px) {
@@ -96,7 +102,8 @@
 
 #artists {
 
-  overflow-y: scroll;
+  overflow-y: auto;
+  
   @include media-md {
 
     overflow-y: visible;

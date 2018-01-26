@@ -631,13 +631,13 @@ button::after {
 ::-webkit-scrollbar-track {
   border-radius: 0;
   -webkit-box-shadow: none;
-  border: 1px solid #F0F0F0;
   background-color: transparent;
 }
 
 ::-webkit-scrollbar {
   width: 10px;
   border-radius: 0;
+  border: 1px solid #F0F0F0;
   background-color: transparent;
 }
 
@@ -866,19 +866,25 @@ button::after {
   }
 }
 
+#details {
+  overflow-y: auto;
+}
 @media screen and (min-width: 650px) and (min-height: 560px) {
+  #details {
+    overflow-y: visible;
+  }
   #details .back-button {
     float: right;
   }
 }
 @media screen and (min-width: 650px) and (min-height: 560px) and (min-height: 700px) {
   #details {
-    padding-top: 35vh;
+    padding-top: 30vh;
   }
 }
 
 #submit {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 @media screen and (min-width: 650px) and (min-height: 560px) {
   #submit {
@@ -892,7 +898,7 @@ button::after {
 }
 
 #artists {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 @media screen and (min-width: 650px) and (min-height: 560px) {
   #artists {
