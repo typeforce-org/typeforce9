@@ -114,7 +114,7 @@
                 <li class="artist-list-item">Kyle Green</li>
                 <li class="artist-list-item">Lauren Gallagher</li>
                 <li class="artist-list-item">Leah Wendzinski</li>
-                <li class="artist-list-item">Linda Elshami</li>
+                <li class="artist-list-item">Linda Abdullah</li>
                 <li class="artist-list-item">Megan Pryce</li>
                 <li class="artist-list-item">Polina Osherov</li>
                 <li class="artist-list-item">Rick Valicenti</li>
