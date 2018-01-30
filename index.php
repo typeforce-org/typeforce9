@@ -45,7 +45,7 @@
     <meta name="twitter:image" content="<?= $image ?>">
     <meta name="twitter:url" content="<?= $url ?>">
     <!-- END meta -->
-    <link rel="stylesheet" href="assets/css/main.min.css?1_26_18v1">
+    <link rel="stylesheet" href="assets/css/main.min.css?1_30_18v1">
     <link type="text/plain" rel="author" href="humans.txt">
     <link rel="shortcut icon" type="image/ico" href="assets/images/favicon.png">
   </head>
@@ -79,10 +79,11 @@
                 3219 S Morgan St<br>
                 Chicago, IL 60607</a></p>
               <h3>When</h3>
-              <p>02/23 - 03/10</p>
+              <p>02/23 - 03/10<br>
+              Sundays 1-5p and Wednesdays 5-8p</p>
+              <p>For school groups, professional orgs or out of state visitors, please <a href="mailto:loganbaybay@gmail.com">email</a> to set up a time to view the exhibition.</p>
               <h3>Opening Night</h3>
-              <p>02/23, 6-11p<!-- <br>
-              <a href="#">RSVP</a> --></p>
+              <p>02/23, 6-11p,  <a href="#">RSVP</a></p>
               <h3>Free Admission</h3>
             </div>
           </div>
@@ -136,7 +137,7 @@
         </div>
       </section>
     </main>
-    <script src="assets/js/build/site.js?1_26_18v1"></script>
+    <script src="assets/js/build/site.js?1_30_18v1"></script>
     <script type="text/javascript">// Google Analytics
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', '<?= $ga_tracking ?>']);
