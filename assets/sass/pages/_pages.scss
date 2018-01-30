@@ -62,17 +62,11 @@
       position: absolute;
       margin-bottom: 30px;
       left: calc( (100% - 560px) / 2);
-      @include min-screen-height(700px) {
-        top: auto;
-        left: auto;
-        position: relative;
-      }
     }
   }
 }
 
 #details {
-
   overflow-y: auto;
   
   @include media-md {
@@ -82,26 +76,40 @@
       float: right;
     }
 
-    @include min-screen-height(700px) {
-      padding-top: 15vh;
+    .content {
+      max-width: 475px;
+    }
+
+    @include min-screen-height(800px) {
+      padding-top: 20vh;
+      
+      .content {
+        top: auto;
+        left: auto;
+        position: relative;
+      }
     }
   }
 }
 
 #submit {
-
   overflow-y: auto;
   
   @include media-md {
     overflow-y: visible;
     @include min-screen-height(700px) {
       padding-top: 35vh;
+      
+      .content {
+        top: auto;
+        left: auto;
+        position: relative;
+      }
     }
   }
 }
 
 #artists {
-
   overflow-y: auto;
   
   @include media-md {
@@ -109,6 +117,12 @@
     overflow-y: visible;
     @include min-screen-height(700px) {
       padding-top: 22vh;
+      
+      .content {      
+        top: auto;
+        left: auto;
+        position: relative;
+      }
     }
   }
 }

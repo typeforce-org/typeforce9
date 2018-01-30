@@ -430,7 +430,7 @@ h2 {
   line-height: 1.25;
   text-transform: none;
 }
-@media screen and (min-width: 650px) and (min-height: 600px) {
+@media screen and (min-width: 650px) and (min-height: 635px) {
   h2 {
     font-family: "Space Mono", monospace;
     font-weight: normal;
@@ -463,7 +463,7 @@ h3 {
   margin-bottom: 0;
   margin-top: 20px;
 }
-@media screen and (min-width: 650px) and (min-height: 600px) {
+@media screen and (min-width: 650px) and (min-height: 635px) {
   h3 {
     margin-top: 30px;
   }
@@ -475,7 +475,7 @@ h3 + p {
 p {
   margin: 20px 0;
 }
-@media screen and (min-width: 650px) and (min-height: 600px) {
+@media screen and (min-width: 650px) and (min-height: 635px) {
   p {
     margin: 30px 0;
   }
@@ -657,7 +657,7 @@ button::after {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
 }
-@media screen and (min-width: 650px) and (min-height: 600px) {
+@media screen and (min-width: 650px) and (min-height: 635px) {
   .site-header .title {
     width: 500px;
   }
@@ -700,7 +700,7 @@ button::after {
   line-height: 1.42857;
   text-transform: uppercase;
 }
-@media screen and (min-width: 650px) and (min-height: 600px) {
+@media screen and (min-width: 650px) and (min-height: 635px) {
   .site-nav {
     font-family: "Space Mono", monospace;
     font-weight: normal;
@@ -729,7 +729,7 @@ button::after {
 .site-nav .menu-item-list:after {
   clear: both;
 }
-@media screen and (min-width: 650px) and (min-height: 600px) {
+@media screen and (min-width: 650px) and (min-height: 635px) {
   .site-nav .menu-item-list {
     top: 0;
     left: 50%;
@@ -756,7 +756,7 @@ button::after {
 .site-nav .menu-item a:hover {
   color: #000AFF;
 }
-@media screen and (min-width: 650px) and (min-height: 600px) {
+@media screen and (min-width: 650px) and (min-height: 635px) {
   .site-nav .menu-item {
     width: auto;
     position: absolute;
@@ -805,7 +805,7 @@ button::after {
 #details .content:after, #submit .content:after, #artists .content:after {
   clear: both;
 }
-@media screen and (min-width: 650px) and (min-height: 600px) {
+@media screen and (min-width: 650px) and (min-height: 635px) {
   #details .content, #submit .content, #artists .content {
     width: 560px;
   }
@@ -838,7 +838,7 @@ button::after {
   margin: 30px 0;
   width: 220px;
 }
-@media screen and (min-width: 650px) and (min-height: 600px) {
+@media screen and (min-width: 650px) and (min-height: 635px) {
   #details .back-button, #submit .back-button, #artists .back-button {
     width: 230px;
     margin-top: 30px;
@@ -846,7 +846,7 @@ button::after {
     position: relative;
   }
 }
-@media screen and (min-width: 650px) and (min-height: 600px) {
+@media screen and (min-width: 650px) and (min-height: 635px) {
   #details, #submit, #artists {
     padding: 0;
   }
@@ -858,56 +858,67 @@ button::after {
     left: calc( (100% - 560px) / 2);
   }
 }
-@media screen and (min-width: 650px) and (min-height: 600px) and (min-height: 700px) {
-  #details .content, #submit .content, #artists .content {
-    top: auto;
-    left: auto;
-    position: relative;
-  }
-}
 
 #details {
   overflow-y: auto;
 }
-@media screen and (min-width: 650px) and (min-height: 600px) {
+@media screen and (min-width: 650px) and (min-height: 635px) {
   #details {
     overflow-y: visible;
   }
   #details .back-button {
     float: right;
   }
+  #details .content {
+    max-width: 475px;
+  }
 }
-@media screen and (min-width: 650px) and (min-height: 600px) and (min-height: 700px) {
+@media screen and (min-width: 650px) and (min-height: 635px) and (min-height: 800px) {
   #details {
-    padding-top: 15vh;
+    padding-top: 20vh;
+  }
+  #details .content {
+    top: auto;
+    left: auto;
+    position: relative;
   }
 }
 
 #submit {
   overflow-y: auto;
 }
-@media screen and (min-width: 650px) and (min-height: 600px) {
+@media screen and (min-width: 650px) and (min-height: 635px) {
   #submit {
     overflow-y: visible;
   }
 }
-@media screen and (min-width: 650px) and (min-height: 600px) and (min-height: 700px) {
+@media screen and (min-width: 650px) and (min-height: 635px) and (min-height: 700px) {
   #submit {
     padding-top: 35vh;
+  }
+  #submit .content {
+    top: auto;
+    left: auto;
+    position: relative;
   }
 }
 
 #artists {
   overflow-y: auto;
 }
-@media screen and (min-width: 650px) and (min-height: 600px) {
+@media screen and (min-width: 650px) and (min-height: 635px) {
   #artists {
     overflow-y: visible;
   }
 }
-@media screen and (min-width: 650px) and (min-height: 600px) and (min-height: 700px) {
+@media screen and (min-width: 650px) and (min-height: 635px) and (min-height: 700px) {
   #artists {
     padding-top: 22vh;
+  }
+  #artists .content {
+    top: auto;
+    left: auto;
+    position: relative;
   }
 }
 
@@ -915,7 +926,7 @@ button::after {
   list-style: none;
   padding-left: 0;
 }
-@media screen and (min-width: 650px) and (min-height: 600px) {
+@media screen and (min-width: 650px) and (min-height: 635px) {
   #artists .content {
     width: 600px;
   }
