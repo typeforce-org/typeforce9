@@ -112,9 +112,9 @@
                 <li class="artist-list-item">John Pobojewski</li>
                 <li class="artist-list-item">Jordan Whitney Martin</li>
                 <li class="artist-list-item">Kaleb Dean</li>
-                <li class="artist-list-item">Kevin Winkler</li>
               </div>
               <div class="col">
+                <li class="artist-list-item">Kevin Winkler</li>
                 <li class="artist-list-item">Kristen Myers</li>
                 <li class="artist-list-item">Kyle Green</li>
                 <li class="artist-list-item">Lauren Gallagher</li>
