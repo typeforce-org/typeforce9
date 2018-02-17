@@ -121,6 +121,7 @@
                 <li class="artist-list-item">Leah Wendzinski</li>
                 <li class="artist-list-item">Linda Abdullah</li>
                 <li class="artist-list-item">Megan Pryce</li>
+                <li class="artist-list-item">Michelle Bowers</li>
                 <li class="artist-list-item">Polina Osherov</li>
                 <li class="artist-list-item">Rick Valicenti</li>
                 <li class="artist-list-item">Robert Sołtys</li>
