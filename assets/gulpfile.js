@@ -80,31 +80,28 @@ gulp.task('svgs', function() {
     .pipe(browserSync.stream());
 });
 
-// Do the build
-gulp.task('build', function(callback) {
-  runSequence('styles',
-              'scripts',
-              ['images', 'svgs'],
-              callback);
-});
 
-// Gulp watch
-gulp.task('watch', function() {
-  // Init BrowserSync
-  browserSync.init({
-    files: ['*.html', '*.php'],
-    proxy: 'typeforce9.static',
-    notify: false,
-  });
-  // Kick it off with a build
-  gulp.start('build');
-  // Watch sass files
-  gulp.watch(paths.scssSrc, ['styles']);
-  // Watch js files
-  gulp.watch(['js/libs/*.js', 'js/main.js'], ['scripts']);
-  // Watch SVGs
-  gulp.watch(paths.svgSrc, ['svgs']);
-});
+gulp.task('build', gulp.series('styles', 'scripts', 'images', 'svgs', function (done) {
+  done();
+}));
+
+// // Gulp watch
+// gulp.task('watch', function() {
+//   // Init BrowserSync
+//   browserSync.init({
+//     files: ['*.html', '*.php'],
+//     proxy: 'typeforce9.static',
+//     notify: false,
+//   });
+//   // Kick it off with a build
+//   gulp.start('build');
+//   // Watch sass files
+//   gulp.watch(paths.scssSrc, ['styles']);
+//   // Watch js files
+//   gulp.watch(['js/libs/*.js', 'js/main.js'], ['scripts']);
+//   // Watch SVGs
+//   gulp.watch(paths.svgSrc, ['svgs']);
+// });
 
 // Make watch the default task
 gulp.task('default', function() {

@@ -1,17 +1,21 @@
 {
-  "name": "starthere",
+  "name": "typeforce-9",
   "version": "0.0.1",
-  "description": "Gulp setup for Start Here front end boilerplate",
+  "description": "Announcment site for Typforce 9",
   "repository": {
     "type": "git",
-    "url": "git://github.com/poopsplat/starthere.git"
+    "url": "https://github.com/typeforce-org/typeforce9.git"
   },
-  "author": "@poopsplat",
-  "dependencies": {},
+  "author": "Bryant Smith",
+  "scripts": {
+    "build": "cd assets && gulp build",
+    "serve": "serve .",
+    "deploy": "firebase deploy --only hosting:typeforce-9"
+  },
   "devDependencies": {
     "browser-sync": "^2.12.8",
     "cheerio": "^0.18.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-concat": "^2.5.2",
     "gulp-imagemin": "^2.2.1",
@@ -25,6 +29,7 @@
     "gulp-svgmin": "^1.1.1",
     "gulp-svgstore": "^5.0.0",
     "gulp-uglify": "^1.1.0",
-    "run-sequence": "^1.2.0"
+    "run-sequence": "^1.2.0",
+    "serve": "^13.0.2"
   }
 }

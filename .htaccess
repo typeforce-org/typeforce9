@@ -1,8 +1,0 @@
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteBase /
-
-# Redirect to typeforce X event page temporarily
-RewriteRule ^(.*)$ http://www\.typeforce\.com [R=301,L]
-
-</IfModule>
