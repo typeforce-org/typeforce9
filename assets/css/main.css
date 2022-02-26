@@ -136,6 +136,7 @@ dfn {
  * Address differences between Firefox and other browsers.
  */
 hr {
+  -moz-box-sizing: content-box;
   box-sizing: content-box;
   height: 0;
 }
@@ -170,7 +171,7 @@ pre {
  * Set consistent quote types.
  */
 q {
-  quotes: "\201C" "\201D" "\2018" "\2019";
+  quotes: "“" "”" "‘" "’";
 }
 
 /**
@@ -294,9 +295,9 @@ select {
  *    `input` and others.
  */
 button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
+html input[type=button],
+input[type=reset],
+input[type=submit] {
   -webkit-appearance: button;
   /* 2 */
   cursor: pointer;
@@ -315,8 +316,8 @@ html input[disabled] {
  * 1. Address box sizing set to `content-box` in IE 8/9/10.
  * 2. Remove excess padding in IE 8/9/10.
  */
-input[type="checkbox"],
-input[type="radio"] {
+input[type=checkbox],
+input[type=radio] {
   box-sizing: border-box;
   /* 1 */
   padding: 0;
@@ -328,9 +329,11 @@ input[type="radio"] {
  * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
  *    (include `-moz` to future-proof).
  */
-input[type="search"] {
+input[type=search] {
   -webkit-appearance: textfield;
   /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
   /* 2 */
   box-sizing: content-box;
 }
@@ -339,8 +342,8 @@ input[type="search"] {
  * Remove inner padding and search cancel button in Safari 5 and Chrome
  * on OS X.
  */
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -448,7 +451,7 @@ h2 .tf9 {
   font-weight: bold;
   font-size: 14px;
   letter-spacing: 1.5px;
-  line-height: 1.42857;
+  line-height: 1.4285714286;
   text-transform: uppercase;
 }
 
@@ -458,7 +461,7 @@ h3 {
   font-weight: bold;
   font-size: 14px;
   letter-spacing: 1.5px;
-  line-height: 1.42857;
+  line-height: 1.4285714286;
   text-transform: uppercase;
   margin-bottom: 0;
   margin-top: 20px;
@@ -498,12 +501,11 @@ p {
 .load-mask img {
   top: 50%;
   left: 50%;
-  content: '';
+  content: "";
   width: 300px;
   height: 300px;
   position: absolute;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 .load-mask #loading-progress-bar {
   width: 0;
@@ -524,37 +526,31 @@ body.loaded .load-mask {
 body .page {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s, -webkit-transform 0.2s;
   transition: opacity 0.2s, transform 0.2s;
 }
 body #details {
-  -webkit-transform: translateX(-10%);
-          transform: translateX(-10%);
+  transform: translateX(-10%);
 }
 body #submit, body #artists {
-  -webkit-transform: translateX(10%);
-          transform: translateX(10%);
+  transform: translateX(10%);
 }
-body[data-current-page="home"] #home {
+body[data-current-page=home] #home {
   opacity: 1;
   pointer-events: auto;
 }
-body[data-current-page="details"] #details {
+body[data-current-page=details] #details {
   opacity: 1;
-  -webkit-transform: none;
-          transform: none;
+  transform: none;
   pointer-events: auto;
 }
-body[data-current-page="submit"] #submit {
+body[data-current-page=submit] #submit {
   opacity: 1;
-  -webkit-transform: none;
-          transform: none;
+  transform: none;
   pointer-events: auto;
 }
-body[data-current-page="artists"] #artists {
+body[data-current-page=artists] #artists {
   opacity: 1;
-  -webkit-transform: none;
-          transform: none;
+  transform: none;
   pointer-events: auto;
 }
 
@@ -589,7 +585,7 @@ button {
   font-weight: bold;
   font-size: 14px;
   letter-spacing: 1.5px;
-  line-height: 1.42857;
+  line-height: 1.4285714286;
   text-transform: uppercase;
   border-radius: 0;
   background: #000AFF;
@@ -604,24 +600,22 @@ button:hover {
 button::before {
   right: 100%;
   top: 4px;
-  content: '';
+  content: "";
   width: 10px;
   background: #090114;
   position: absolute;
   height: calc(100% + 1px);
-  -webkit-transform: skewY(-45deg);
-          transform: skewY(-45deg);
+  transform: skewY(-45deg);
 }
 button::after {
   top: 100%;
   left: -5px;
-  content: '';
+  content: "";
   height: 10px;
   background: #090114;
   position: absolute;
   width: calc(100% + 1px);
-  -webkit-transform: skewX(-45deg);
-          transform: skewX(-45deg);
+  transform: skewX(-45deg);
 }
 
 .scrollbox :last-child {
@@ -654,8 +648,7 @@ button::after {
   height: 100%;
   position: absolute;
   width: calc(100% - 180px);
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 @media screen and (min-width: 650px) and (min-height: 635px) {
   .site-header .title {
@@ -674,20 +667,20 @@ button::after {
   line-height: 1;
   text-transform: none;
   position: absolute;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: max-content;
 }
 .site-header .t {
   top: 18vh;
 }
 .site-header .t::after {
-  content: '—';
+  content: "—";
 }
 .site-header .f {
   bottom: 18vh;
 }
 .site-header .f::before {
-  content: '—';
+  content: "—";
 }
 
 .site-nav {
@@ -697,7 +690,7 @@ button::after {
   font-weight: bold;
   font-size: 14px;
   letter-spacing: 1.5px;
-  line-height: 1.42857;
+  line-height: 1.4285714286;
   text-transform: uppercase;
 }
 @media screen and (min-width: 650px) and (min-height: 635px) {
@@ -721,7 +714,7 @@ button::after {
   position: absolute;
 }
 .site-nav .menu-item-list:before, .site-nav .menu-item-list:after {
-  content: "\0020";
+  content: " ";
   display: block;
   height: 0;
   overflow: hidden;
@@ -737,8 +730,7 @@ button::after {
     height: 100%;
     bottom: auto;
     min-width: 600px;
-    -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
+    transform: translateX(-50%);
   }
 }
 .site-nav .menu-item {
@@ -760,18 +752,15 @@ button::after {
   .site-nav .menu-item {
     width: auto;
     position: absolute;
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
+    transform: translateY(-50%);
   }
   .site-nav .menu-item.details {
     left: 0;
-    -webkit-transform: translateY(-50%) rotate(90deg);
-            transform: translateY(-50%) rotate(90deg);
+    transform: translateY(-50%) rotate(90deg);
   }
   .site-nav .menu-item.submit, .site-nav .menu-item.artists {
     right: 0;
-    -webkit-transform: translateY(-50%) rotate(270deg);
-            transform: translateY(-50%) rotate(270deg);
+    transform: translateY(-50%) rotate(270deg);
   }
 }
 
@@ -797,7 +786,7 @@ button::after {
   position: relative;
 }
 #details .content:before, #details .content:after, #submit .content:before, #submit .content:after, #artists .content:before, #artists .content:after {
-  content: "\0020";
+  content: " ";
   display: block;
   height: 0;
   overflow: hidden;
@@ -816,7 +805,7 @@ button::after {
     *zoom: 1;
   }
   #details .content .col-wrap:before, #details .content .col-wrap:after, #submit .content .col-wrap:before, #submit .content .col-wrap:after, #artists .content .col-wrap:before, #artists .content .col-wrap:after {
-    content: "\0020";
+    content: " ";
     display: block;
     height: 0;
     overflow: hidden;
@@ -855,7 +844,7 @@ button::after {
     height: auto;
     position: absolute;
     margin-bottom: 30px;
-    left: calc( (100% - 560px) / 2);
+    left: calc((100% - 560px) / 2);
   }
 }
 
@@ -942,3 +931,5 @@ button::after {
     width: 200px;
   }
 }
+
+/*# sourceMappingURL=main.css.map */

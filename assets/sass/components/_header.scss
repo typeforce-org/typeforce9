@@ -21,6 +21,7 @@
     @include font-h1;
     position: absolute;
     transform: translateX(-50%);
+    width: max-content;
   }
 
   .t {
